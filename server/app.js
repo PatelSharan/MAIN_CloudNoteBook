@@ -22,6 +22,9 @@ app.get('/', routerUser)
 
 app.post('/registeruser', routerUser)
 
+app.post('/loginuser', routerUser)
+
+
 
 //Server Listening
 app.listen(port, () => {
