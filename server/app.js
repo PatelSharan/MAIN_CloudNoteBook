@@ -6,10 +6,11 @@ const port = process.env.PORT || 3001
 const connectDB = require('./connectDB/connectDB.js')
 const DB_URL = process.env.DB_URL
 const routerUser = require('./router/user.js')
-
+const cors = require('cors')
 
 
 app.use(express.json())
+app.use(cors())
 
 
 //Connect With DB
