@@ -17,14 +17,14 @@ router.post('/registeruser', async (req, res) => {
 
         //If name, email, and password not enterd
         if (!name || !email || !password) {
-            res.status(400).send('please fill details')
+            res.status(422).json('please fill details')
         }
 
 
         //If user is already Exist
         const userExist = await User.findOne({ email })
         if (userExist) {
-            res.status(400).send('User Exist With This Email')
+            res.status(400).json('User Exist With This Email')
         }
 
         // hash password
@@ -39,6 +39,7 @@ router.post('/registeruser', async (req, res) => {
         const result = await newUser.save()
         res.status(200).send(newUser)
 
+
     } catch (error) {
         res.send('can\'t register user')
     }
@@ -51,25 +52,25 @@ router.post('/loginuser', async (req, res) => {
 
         //If email and password not enterd
         if (!email || !password) {
-            return res.status(400).json({ error: "Please fill details" })
+            return res.status(422).json({ error: "Please fill details" })
         }
 
         //find user with email
         const findUser = await User.findOne({ email })
         if (!findUser) {
-            res.status(400).send('User Not Exist')
+            res.status(400).json('User Not Exist')
         }
 
         //password compare 
-        const matchPassword = bcrypt.compare(password, findUser.password)
+        const matchPassword = await bcrypt.compare(password, findUser.password)
         if (matchPassword) {
             res.status(200).send(findUser)
         } else {
-            res.status(401).send('login failed')
+            res.status(401).json('login failed')
         }
 
     } catch (error) {
-        res.status(400).send('can\'t login user')
+        res.send('can\'t login user')
     }
 })
 
