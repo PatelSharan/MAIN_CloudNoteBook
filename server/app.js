@@ -6,6 +6,7 @@ const port = process.env.PORT || 3001
 const connectDB = require('./connectDB/connectDB.js')
 const DB_URL = process.env.DB_URL
 const routerUser = require('./router/user.js')
+const routerNote = require('./router/note.js')
 const cors = require('cors')
 
 
@@ -25,6 +26,7 @@ app.post('/registeruser', routerUser)
 
 app.post('/loginuser', routerUser)
 
+app.post('/addnote', routerNote)
 
 
 //Server Listening

@@ -6,7 +6,7 @@ import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'MAIN_RegistrationForm_MERN - Register Your Self',
+  title: 'CloudNoteBook - Save Your Notes On Cloud',
   description: '',
 }
 
