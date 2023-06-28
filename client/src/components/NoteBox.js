@@ -22,11 +22,14 @@ const NoteBox = () => {
     }, [])
 
     const deleteNote = async (id) => {
-        const res = await fetch(`http://localhost:7000/deletenote/${id}`, {
-            method: 'DELETE'
-        })
-        let newNote = notes.filter((notes) => { return notes._id !== id })
-        setNotes(newNote)
+        let result = confirm('Want to Delete note')
+        if (result) {
+            const res = await fetch(`http://localhost:7000/deletenote/${id}`, {
+                method: 'DELETE'
+            })
+            let newNote = notes.filter((notes) => { return notes._id !== id })
+            setNotes(newNote)
+        }
     }
 
     const editNote = async (id) => {
