@@ -7,7 +7,11 @@ const NoteBox = () => {
 
     const fetchNotes = async (url) => {
         try {
-            const res = await fetch(url)
+            const res = await fetch(url, {
+                headers: {
+                    'jwt-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaW5kVXNlciI6eyJpZCI6IjY0OWMyZDJhYzhmMTNkNzYwNDIxNjliNyJ9LCJpYXQiOjE2ODc5NTY3OTB9.NXl3csuqYXe7Lppx8uZ8CdEb3e8KvK9ERYQxCDVyaJk'
+                }
+            })
             const data = await res.json()
             if (data.length > 0) {
                 setNotes(data)
@@ -25,7 +29,10 @@ const NoteBox = () => {
         let result = confirm('Want to Delete note')
         if (result) {
             const res = await fetch(`http://localhost:7000/deletenote/${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'jwt-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaW5kVXNlciI6eyJpZCI6IjY0OWMyZDJhYzhmMTNkNzYwNDIxNjliNyJ9LCJpYXQiOjE2ODc5NTY3OTB9.NXl3csuqYXe7Lppx8uZ8CdEb3e8KvK9ERYQxCDVyaJk'
+                }
             })
             let newNote = notes.filter((notes) => { return notes._id !== id })
             setNotes(newNote)
@@ -36,7 +43,8 @@ const NoteBox = () => {
         const res = await fetch(`http://localhost:7000/updatenote/${id}`, {
             method: 'PUT',
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'jwt-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaW5kVXNlciI6eyJpZCI6IjY0OWMyZDJhYzhmMTNkNzYwNDIxNjliNyJ9LCJpYXQiOjE2ODc5NTY3OTB9.NXl3csuqYXe7Lppx8uZ8CdEb3e8KvK9ERYQxCDVyaJk'
             },
             body: JSON.stringify({
                 title, body

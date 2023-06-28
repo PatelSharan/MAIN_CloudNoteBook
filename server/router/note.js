@@ -1,24 +1,25 @@
 const express = require('express')
 const router = express.Router()
 const Note = require('../models/note.js')
+const fetchuser = require('../middelwares/fetchuser.js')
 
 
 
-router.get('/getnotes', async (req, res) => {
+router.get('/getnotes', fetchuser, async (req, res) => {
     try {
-        const findNote = await Note.find()
-        res.send(findNote)
+        const findNotes = await Note.find({ user: req.userId })
+        res.send(findNotes)
     } catch (error) {
         res.send('Cannot fetch Notes!')
     }
 })
 
 
-router.post('/addnote', async (req, res) => {
+router.post('/addnote', fetchuser, async (req, res) => {
     try {
         const { title, body } = req.body
         const newNote = await new Note({
-            title, body
+            title, body, user: req.userId
         })
         const result = await newNote.save()
         res.send(newNote)

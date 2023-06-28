@@ -24,7 +24,8 @@ export default function Home() {
     const res = await fetch('http://localhost:7000/addnote', {
       method: 'POST',
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        'jwt-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaW5kVXNlciI6eyJpZCI6IjY0OWMyZDJhYzhmMTNkNzYwNDIxNjliNyJ9LCJpYXQiOjE2ODc5NTY3OTB9.NXl3csuqYXe7Lppx8uZ8CdEb3e8KvK9ERYQxCDVyaJk'
       },
       body: JSON.stringify({
         title, body

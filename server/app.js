@@ -8,6 +8,7 @@ const DB_URL = process.env.DB_URL
 const routerUser = require('./router/user.js')
 const routerNote = require('./router/note.js')
 const cors = require('cors')
+const fetchuser = require('./middelwares/fetchuser.js')
 
 
 app.use(express.json())
@@ -23,12 +24,13 @@ connectDB(DB_URL)
 app.get('/', routerUser)
 app.post('/registeruser', routerUser)
 app.post('/loginuser', routerUser)
+app.post('/getuser', fetchuser, routerUser)
 
 
 //Notes Routes 
-app.post('/addnote', routerNote)
-app.get('/getnotes', routerNote)
-app.put('/updatenote/:id', routerNote)
+app.post('/addnote', fetchuser, routerNote)
+app.get('/getnotes', fetchuser, routerNote)
+app.put('/updatenote/:id', fetchuser, routerNote)
 app.delete('/deletenote/:id', routerNote)
 
 

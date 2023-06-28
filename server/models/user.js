@@ -14,11 +14,14 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        require: true
+        required: true
     },
     date: {
         type: Date,
         default: Date.now
+    },
+    jwttokens: {
+        type: String,
     }
 })
 
