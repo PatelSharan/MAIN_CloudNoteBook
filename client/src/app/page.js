@@ -54,6 +54,9 @@ export default function Home() {
         progress: undefined,
         theme: "light"
       })
+      setNote({
+        title: '', body: ''
+      })
     }
 
   }
@@ -72,7 +75,7 @@ export default function Home() {
               </div>
               <div class="relative mb-4">
                 <label for="description" class="leading-7 text-xs text-gray-600">Description</label>
-                <textarea id="body" name="body" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-sm outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out" onChange={handleInputs}>{note.body}</textarea>
+                <textarea id="body" name="body" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-sm outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out" value={note.body} onChange={handleInputs}></textarea>
               </div>
               <div className="text-right">
                 <button class="text-white bg-black border-2 border-black py-2 px-6 focus:outline-none hover:bg-white hover:text-black text-xs w-32 hover:-translate-y-2 duration-200 ease-in-out" onClick={postData}>Add Note</button>
