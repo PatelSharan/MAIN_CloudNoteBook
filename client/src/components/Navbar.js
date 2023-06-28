@@ -9,6 +9,9 @@ const Navbar = () => {
                     <Link href={'/'}>Home</Link>
                 </li>
                 <li className='py-5 px-4 hover:text-white text-sm'>
+                    <Link href={'/notes'}>Notes</Link>
+                </li>
+                <li className='py-5 px-4 hover:text-white text-sm'>
                     <Link href={'/login'}>Login</Link>
                 </li>
                 <li className='py-5 px-4 hover:text-white text-sm'>

@@ -113,15 +113,15 @@ const page = () => {
                         <h2 class="text-gray-900 text-2xl font-medium title-font mb-5">Sign Up</h2>
                         <div class="relative mb-4">
                             <label for="name" class="leading-7 text-xs text-gray-600">Name</label>
-                            <input type="text" id="name" value={user.name} onChange={handleInputs} name="name" class="w-full bg-white border-b-2 border-black focus:border-b-blue-700  text-sm outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out mb-3" />
+                            <input type="text" id="name" value={user.name} onChange={handleInputs} name="name" class="w-full bg-white border-b-2 border-black focus:border-b-blue-700  text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out mb-3" />
                         </div>
                         <div class="relative mb-4">
                             <label for="email" class="leading-7 text-xs text-gray-600">Email</label>
-                            <input type="email" id="email" value={user.email} onChange={handleInputs} name="email" class="w-full bg-white border-b-2 border-black focus:border-b-blue-700  text-sm outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out mb-3" />
+                            <input type="email" id="email" value={user.email} onChange={handleInputs} name="email" class="w-full bg-white border-b-2 border-black focus:border-b-blue-700  text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out mb-3" />
                         </div>
                         <div class="relative mb-4">
                             <label for="password" class="leading-7 text-xs text-gray-600">Password</label>
-                            <input type={showPassword ? 'text' : 'password'} id="password" value={user.password} name="password" class="w-full bg-white border-b-2 border-black focus:border-b-blue-700  text-sm outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out mb-3" onChange={mulEvents} />
+                            <input type={showPassword ? 'text' : 'password'} id="password" value={user.password} name="password" class="w-full bg-white border-b-2 border-black focus:border-b-blue-700 text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out mb-3" onChange={mulEvents} />
                             {/* If Password has Value then Login */}
                             {passValue ? <button onClick={handleEventPreventDefaulf}>
                                 {/* If ShowPassword the Login */}
@@ -134,8 +134,8 @@ const page = () => {
                                 </svg>}
                             </button> : <button></button>}
                         </div>
-                        <button class="text-white bg-slate-800 border-0 py-2 px-8 focus:outline-none hover:bg-slate-700 rounded text-sm w-36" onClick={postData}>Sign Up</button>
-                        <p class="text-xs text-gray-500 mt-3">Already Have Account ? <Link className='text-blue-700 cursor-pointer hover:underline font-semibold' href={'/login'}>Login</Link></p>
+                        <button class="text-white bg-black  py-2 px-8 text-sm w-32  hover:bg-white hover:text-black border-2 border-black hover:-translate-y-2 duration-200 ease-in-out" onClick={postData}>Sign Up</button>
+                        <p class="text-xs text-gray-500 mt-3">Already Have An Account ? <Link className='text-blue-700 cursor-pointer hover:underline font-semibold' href={'/login'}>Login</Link></p>
                     </div>
                 </form>
                 <ToastContainer />
