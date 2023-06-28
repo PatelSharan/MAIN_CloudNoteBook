@@ -26,8 +26,8 @@ app.post('/loginuser', routerUser)
 
 
 //Notes Routes 
-app.get('/getnotes', routerNote)
 app.post('/addnote', routerNote)
+app.get('/getnotes', routerNote)
 app.put('/updatenote/:id', routerNote)
 app.delete('/deletenote/:id', routerNote)
 

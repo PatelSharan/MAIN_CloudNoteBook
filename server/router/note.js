@@ -23,7 +23,7 @@ router.post('/addnote', async (req, res) => {
         const result = await newNote.save()
         res.send(newNote)
     } catch (error) {
-
+        res.status(422).send('Cannot Add Note')
     }
 })
 
