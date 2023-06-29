@@ -7,7 +7,10 @@ import { Router, useRouter } from 'next/navigation';
 
 const Page = () => {
 
+    //Hosted backend api 
     const backEndurl = 'https://cloudnotebook-backend.vercel.app'
+
+    //local backend api
     // const backEndurl = 'http://localhost:7000'
 
 
@@ -64,6 +67,21 @@ const Page = () => {
         });
 
         const data = await res.json()
+        let errMessageFromValidation
+        if (data.errors && data.errors.length > 0) {
+            const errMessageFromValidation = data.errors[0].msg
+            toast.error(errMessageFromValidation, {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            return errMessageFromValidation
+        }
 
         if (res.status === 422 || !data) {
             toast.error('Fill Details Properly!', {
@@ -139,7 +157,7 @@ const Page = () => {
                                 </svg>}
                             </button> : <button></button>}
                         </div>
-                        <button class="text-white bg-black  py-2 px-8 text-xs w-32  hover:bg-white hover:text-black border-2 border-black hover:-translate-y-2 duration-200 ease-in-out" onClick={postData}>Sign Up</button>
+                        <button class="text-white bg-black  py-2 px-8 text-sm w-32  hover:bg-white hover:text-black border-2 border-black hover:-translate-y-2 duration-200 ease-in-out" onClick={postData}>Sign Up</button>
                         <p class="text-xs text-gray-500 mt-3">Already Have An Account ? <Link className='text-blue-700 cursor-pointer hover:underline font-semibold' href={'/login'}>Login</Link></p>
                     </div>
                 </form>

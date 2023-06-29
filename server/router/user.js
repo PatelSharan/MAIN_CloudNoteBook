@@ -5,49 +5,62 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const SECRET_KEY = process.env.SECRET_KEY
 const fetchuser = require('../middelwares/fetchuser.js')
+const { check, validationResult } = require('express-validator');
+
 
 router.get('/', (req, res) => {
     res.send('Server....')
 })
 
 
-router.post('/registeruser', async (req, res) => {
+router.post('/registeruser', [
+    check('name', 'Name Must Be At Least 2 Characters.').isLength({ min: 2 }),
+    check('email', 'Email Is Not Valid').isEmail(),
+    check('password', 'Password Must Be At Least 5 Characters.').isLength({ min: 5 })
+], async (req, res) => {
 
     try {
 
-        const { name, email, password } = req.body
-
-        //If name, email, and password not enterd
-        if (!name || !email || !password) {
-            res.status(422).json('please fill details')
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.status(401).json(errors)
         }
         else {
 
-            //If user is already Exist
-            const userExist = await User.findOne({ email })
-            if (userExist) {
-                res.status(400).json('User Exist With This Email')
+            const { name, email, password } = req.body
+
+            //If name, email, and password not enterd
+            if (!name || !email || !password) {
+                res.status(422).json('please fill details')
             }
             else {
 
-
-                // hash password
-                const saltRound = 10;
-                const hasedPassword = await bcrypt.hash(req.body.password, saltRound)
-
-
-                //newUser 
-                const newUser = await new User({ name, email, password: hasedPassword, jwttokens: '' })
-
-                //Genrating jwt Token when user signUP
-                const jwttoken = jwt.sign({ id: newUser._id.toHexString() }, SECRET_KEY)
-                newUser.jwttokens = jwttoken
+                //If user is already Exist
+                const userExist = await User.findOne({ email })
+                if (userExist) {
+                    res.status(400).json('User Exist With This Email')
+                }
+                else {
 
 
-                //Save new user Into DB
-                const result = await newUser.save()
+                    // hash password
+                    const saltRound = 10;
+                    const hasedPassword = await bcrypt.hash(req.body.password, saltRound)
 
-                res.status(200).send(newUser)
+
+                    //newUser 
+                    const newUser = await new User({ name, email, password: hasedPassword, jwttokens: '' })
+
+                    //Genrating jwt Token when user signUP
+                    const jwttoken = jwt.sign({ id: newUser._id.toHexString() }, SECRET_KEY)
+                    newUser.jwttokens = jwttoken
+
+
+                    //Save new user Into DB
+                    const result = await newUser.save()
+
+                    res.status(200).send(newUser)
+                }
             }
         }
     } catch (error) {
