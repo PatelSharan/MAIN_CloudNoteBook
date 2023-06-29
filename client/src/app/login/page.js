@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Router, useRouter } from 'next/navigation';
 
 
-const page = () => {
+const Page = () => {
     const router = useRouter()
 
     const [showPassword, setShowPassword] = useState(false)
@@ -151,4 +151,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 
 const NoteBox = () => {
 
+    const backEndurl = 'http://localhost:7000'
+
     const [notes, setNotes] = useState([])
 
     const fetchNotes = async (url) => {
@@ -24,13 +26,13 @@ const NoteBox = () => {
     }
 
     useEffect(() => {
-        fetchNotes('http://localhost:7000/getnotes')
+        fetchNotes(`${backEndurl}/getnotes`)
     }, [])
 
     const deleteNote = async (id) => {
         let result = confirm('Want to Delete note')
         if (result) {
-            const res = await fetch(`http://localhost:7000/deletenote/${id}`, {
+            const res = await fetch(`${backEndurl}/deletenote/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'jwt-token': localStorage.getItem('token')
@@ -42,7 +44,7 @@ const NoteBox = () => {
     }
 
     const editNote = async (id) => {
-        const res = await fetch(`http://localhost:7000/updatenote/${id}`, {
+        const res = await fetch(`${backEndurl}/updatenote/${id}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
