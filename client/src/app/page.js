@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
 
-  const backEndurl = 'http://localhost:7000'
+  const backEndurl = 'https://cloudnotebook-production.up.railway.app/'
 
   const [note, setNote] = useState({
     title: '', body: ''
