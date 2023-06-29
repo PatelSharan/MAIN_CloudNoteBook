@@ -96,6 +96,11 @@ router.post('/loginuser', async (req, res) => {
     }
 })
 
+
+router.post('/forgot-password', (req, res) => {
+
+})
+
 router.post('/getuser', fetchuser, async (req, res) => {
     try {
 

@@ -1,14 +1,11 @@
 "use client"
 import React, { useState } from 'react'
-import Link from 'next/link'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Router, useRouter } from 'next/navigation';
 
 
 const Page = () => {
-
-    const backEndurl = 'https://cloudnotebook-backend.vercel.app'
 
     const router = useRouter()
 
@@ -46,75 +43,51 @@ const Page = () => {
     }
 
 
-    const loginUser = async (e) => {
+    const postData = async (e) => {
         e.preventDefault()
-        const { email, password } = user
+        // const { email, password } = user
 
-        const res = await fetch(`https://cloudnotebook-backend.vercel.app/loginuser`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email, password
-            })
-        });
-        const data = await res.json()
-        console.log(data.jwttokens)
+        // const res = await fetch(`https://cloudnotebook-backend.vercel.app/loginuser`, {
+        //     method: 'POST',
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify({
+        //         email, password
+        //     })
+        // });
+        // const data = await res.json()
+        // console.log(data.jwttokens)
 
-        if (res.status === 422 || !data) {
-            toast.error('Fill Details Properly!', {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-        }
-        else if (res.status === 401 || !data) {
-            toast.error('Invalid Details !', {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-        }
-        else if (res.status === 400 || !data) {
-            toast.error('User Not Exist!', {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-        }
-        else {
-            toast.success('Login Successfully..!', {
-                position: "top-right",
-                autoClose: 1000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                onClose: () => {
-                    router.push('/')
-                },
-            })
-            localStorage.setItem('token', data.jwttokens)
-            setUser({ email: '', password: '' })
-        }
+        // if (res.status === 422 || !data) {
+        //     toast.error('Fill Details Properly!', {
+        //         position: "top-right",
+        //         autoClose: 2000,
+        //         hideProgressBar: false,
+        //         closeOnClick: true,
+        //         pauseOnHover: true,
+        //         draggable: true,
+        //         progress: undefined,
+        //         theme: "light",
+        //     });
+        // }
+        // else {
+        //     toast.success('Login Successfully..!', {
+        //         position: "top-right",
+        //         autoClose: 1000,
+        //         hideProgressBar: false,
+        //         closeOnClick: true,
+        //         pauseOnHover: true,
+        //         draggable: true,
+        //         progress: undefined,
+        //         theme: "light",
+        //         onClose: () => {
+        //             router.push('/')
+        //         },
+        //     })
+        //     localStorage.setItem('token', data.jwttokens)
+        //     setUser({ email: '', password: '' })
+        // }
 
 
     }
@@ -123,13 +96,13 @@ const Page = () => {
             <section className="text-gray-600 body-font px-5 py-12">
                 <form action="" method='POST'>
                     <div className="rounded-lg p-4 flex flex-col m-auto mt-10 md:mt-0 sm:w-[80vw]">
-                        <h2 className="text-gray-900 text-2xl font-medium title-font mb-5">Login</h2>
+                        <h2 className="text-gray-900 text-2xl font-medium title-font mb-5">Forgot Password</h2>
                         <div className="relative mb-4">
                             <label for="email" className="leading-7 text-xs text-gray-600">Email</label>
                             <input type="email" id="email" value={user.email} name="email" className="w-full bg-white border-b-2 border-black focus:border-b-blue-700  text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out mb-3" onChange={handleInputs} />
                         </div>
                         <div className="relative mb-4">
-                            <label for="password" className="leading-7 text-xs text-gray-600">Password</label>
+                            <label for="password" className="leading-7 text-xs text-gray-600">New Password</label>
                             <input type={showPassword ? 'text' : 'password'} id="password" value={user.password} name="password" className="w-full bg-white border-b-2 border-black focus:border-b-blue-700  text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out mb-3" onChange={mulEvents} />
                             {/* If Password has Value then Login */}
                             {passValue ? <button onClick={handleEventPreventDefaulf}>
@@ -143,9 +116,8 @@ const Page = () => {
                                 </svg>}
                             </button> : <button></button>}
                         </div>
-                        <span className='text-xs text-end mb-3 text-blue-700 font-semibold hover:underline cursor-pointer'><Link href={'/changepassword'}>Forgot Password ?</Link></span>
-                        <button className="text-white bg-black  py-2 px-8 text-sm w-28  hover:bg-white hover:text-black border-2 border-black hover:-translate-y-2 duration-200 ease-in-out" onClick={loginUser}>Login</button>
-                        <p className="text-xs text-gray-500 mt-3">Don&apos;t Have An Account ? <Link className='text-blue-700 cursor-pointer hover:underline font-semibold' href={'/signup'}>SignUp</Link></p>
+                        <button className="text-white bg-black  py-2 px-8 text-xs w-44 hover:bg-white hover:text-black border-2 border-black hover:-translate-y-2 duration-200 ease-in-out" onClick={postData}>Change Password</button>
+                        <p className="text-xs text-gray-500 mt-3">Don&apos;t Share Your Password With Any One.</p>
                     </div>
                 </form >
                 <ToastContainer />
