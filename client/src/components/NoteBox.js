@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 const NoteBox = () => {
 
-    const backEndurl = 'http://localhost:7000'
+    const backEndurl = 'https://cloudnotebook.onrender.com'
 
     const [notes, setNotes] = useState([])
 
