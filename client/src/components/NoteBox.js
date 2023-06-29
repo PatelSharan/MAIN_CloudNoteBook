@@ -15,7 +15,6 @@ const NoteBox = () => {
                 }
             })
             const data = await res.json()
-            console.log(data)
             if (data.length > 0) {
                 setNotes(data)
             }
@@ -60,14 +59,12 @@ const NoteBox = () => {
         <>
             {notes.map((note) => {
                 return (
-                    < section class="text-gray-600 body-font" key={note._id} >
+                    <section class="text-gray-600 body-font" key={note._id} >
                         <div class="flex flex-wrap px-5 py-3 m-auto  sm:w-[80vw]">
                             <div class="flex border shadow-md rounded border-gray-200 p-5 sm:flex-row flex-col w-full">
                                 <div class="flex-grow">
                                     <h2 class="text-gray-900 text-lg title-font font-medium mb-3">{note.title}</h2>
                                     <p class="leading-relaxed text-sm">{note.body}</p>
-                                    {/* <h2 class="text-gray-900 text-lg title-font font-medium mb-3">sakj;fkasjfk;</h2>
-                            <p class="leading-relaxed text-sm">falskjflasdfjkasklfkas;jfkjasdkfasf a;lj lkfj;fjsdakf;</p> */}
                                     <div className="text-right space-x-5 mt-4">
                                         <button class="text-white bg-black border-2 border-black py-2 focus:outline-none hover:bg-white hover:text-black text-xs w-24 hover:-translate-y-2 duration-200 ease-in-out" onClick={() => { editNote(note._id) }}>Edit Note</button>
                                         <button class="text-white bg-black border-2 border-black py-2 focus:outline-none hover:bg-white hover:text-black text-xs w-24 hover:-translate-y-2 duration-200 ease-in-out" onClick={() => { deleteNote(note._id) }}> Delete Note</button>

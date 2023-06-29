@@ -8,6 +8,7 @@ import { Router, useRouter } from 'next/navigation';
 
 const Page = () => {
 
+
     const backEndurl = 'https://cloudnotebook-backend.vercel.app'
     // const backEndurl = 'http://localhost:7000'
 
@@ -61,7 +62,6 @@ const Page = () => {
             })
         });
         const data = await res.json()
-        console.log(data.jwttokens)
 
         if (res.status === 422 || !data) {
             toast.error('Fill Details Properly!', {
@@ -116,7 +116,6 @@ const Page = () => {
             localStorage.setItem('token', data.jwttokens)
             setUser({ email: '', password: '' })
         }
-
 
     }
     return (
