@@ -7,6 +7,8 @@ import { Router, useRouter } from 'next/navigation';
 
 const Page = () => {
 
+    const backEndurl = 'https://cloudnotebook-backend.vercel.app'
+
     const router = useRouter()
 
     const [showPassword, setShowPassword] = useState(false)
@@ -49,7 +51,7 @@ const Page = () => {
         e.preventDefault()
         const { name, email, password } = user
 
-        const res = await fetch('http://localhost:7000/registeruser', {
+        const res = await fetch(`${backEndurl}/registeruser`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
