@@ -25,7 +25,7 @@ export default function Home() {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
-        'jwt-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaW5kVXNlciI6eyJpZCI6IjY0OWMyZDJhYzhmMTNkNzYwNDIxNjliNyJ9LCJpYXQiOjE2ODc5NTY3OTB9.NXl3csuqYXe7Lppx8uZ8CdEb3e8KvK9ERYQxCDVyaJk'
+        'jwt-token': localStorage.getItem('token')
       },
       body: JSON.stringify({
         title, body

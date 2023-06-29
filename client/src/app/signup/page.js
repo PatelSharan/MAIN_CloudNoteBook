@@ -99,6 +99,7 @@ const page = () => {
                     router.push('/')
                 }
             })
+            localStorage.setItem('token', data.jwttokens)
             setUser({ name: '', email: '', password: '' })
         }
 

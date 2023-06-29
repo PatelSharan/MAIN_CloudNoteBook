@@ -11,8 +11,6 @@ const fetchuser = (req, res, next) => {
         }
         const decoded = jwt.verify(token, SECRET_KEY)
         req.userId = decoded.id
-        // console.log('decoded is : ', decoded)
-        // console.log('user id is :', req.userId)
         next()
     } catch (error) {
         console.log(error.message)

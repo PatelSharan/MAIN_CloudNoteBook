@@ -9,15 +9,17 @@ const NoteBox = () => {
         try {
             const res = await fetch(url, {
                 headers: {
-                    'jwt-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaW5kVXNlciI6eyJpZCI6IjY0OWMyZDJhYzhmMTNkNzYwNDIxNjliNyJ9LCJpYXQiOjE2ODc5NTY3OTB9.NXl3csuqYXe7Lppx8uZ8CdEb3e8KvK9ERYQxCDVyaJk'
+                    'jwt-token': localStorage.getItem('token')
                 }
             })
             const data = await res.json()
+            console.log(data)
             if (data.length > 0) {
                 setNotes(data)
             }
+
         } catch (error) {
-            console.error('Error', error)
+            console.error(error.message)
         }
     }
 
@@ -31,7 +33,7 @@ const NoteBox = () => {
             const res = await fetch(`http://localhost:7000/deletenote/${id}`, {
                 method: 'DELETE',
                 headers: {
-                    'jwt-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaW5kVXNlciI6eyJpZCI6IjY0OWMyZDJhYzhmMTNkNzYwNDIxNjliNyJ9LCJpYXQiOjE2ODc5NTY3OTB9.NXl3csuqYXe7Lppx8uZ8CdEb3e8KvK9ERYQxCDVyaJk'
+                    'jwt-token': localStorage.getItem('token')
                 }
             })
             let newNote = notes.filter((notes) => { return notes._id !== id })
@@ -44,7 +46,7 @@ const NoteBox = () => {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
-                'jwt-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaW5kVXNlciI6eyJpZCI6IjY0OWMyZDJhYzhmMTNkNzYwNDIxNjliNyJ9LCJpYXQiOjE2ODc5NTY3OTB9.NXl3csuqYXe7Lppx8uZ8CdEb3e8KvK9ERYQxCDVyaJk'
+                'jwt-token': localStorage.getItem('token')
             },
             body: JSON.stringify({
                 title, body

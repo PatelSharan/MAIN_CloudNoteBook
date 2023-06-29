@@ -57,6 +57,7 @@ const page = () => {
             })
         });
         const data = await res.json()
+        console.log(data.jwttokens)
 
         if (res.status === 422 || !data) {
             toast.error('Fill Details Properly!', {
@@ -106,8 +107,9 @@ const page = () => {
                 theme: "light",
                 onClose: () => {
                     router.push('/')
-                }
+                },
             })
+            localStorage.setItem('token', data.jwttokens)
             setUser({ email: '', password: '' })
         }
 

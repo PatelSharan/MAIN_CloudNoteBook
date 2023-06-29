@@ -86,6 +86,7 @@ router.post('/loginuser', async (req, res) => {
         }
         //finding User id from jwt
         const userId = verifyToken.id
+        // res.send(token)
         // console.log(`user id is : ${userId}`)
 
 
@@ -99,6 +100,8 @@ router.post('/getuser', fetchuser, async (req, res) => {
     try {
 
         userId = await req.userId
+        console.log(userId)
+
         const user = await User.findById(userId).select('-password')
         res.send(user)
     } catch (error) {
