@@ -7,7 +7,8 @@ import { Router, useRouter } from 'next/navigation';
 
 const Page = () => {
 
-    const backEndurl = 'https://cloudnotebook-backend.vercel.app'
+    // const backEndurl = 'https://cloudnotebook-backend.vercel.app'
+    const backEndurl = 'http://localhost:7000'
 
 
     const router = useRouter()
@@ -138,7 +139,7 @@ const Page = () => {
                                 </svg>}
                             </button> : <button></button>}
                         </div>
-                        <button class="text-white bg-black  py-2 px-8 text-sm w-32  hover:bg-white hover:text-black border-2 border-black hover:-translate-y-2 duration-200 ease-in-out" onClick={postData}>Sign Up</button>
+                        <button class="text-white bg-black  py-2 px-8 text-xs w-32  hover:bg-white hover:text-black border-2 border-black hover:-translate-y-2 duration-200 ease-in-out" onClick={postData}>Sign Up</button>
                         <p class="text-xs text-gray-500 mt-3">Already Have An Account ? <Link className='text-blue-700 cursor-pointer hover:underline font-semibold' href={'/login'}>Login</Link></p>
                     </div>
                 </form>

@@ -8,7 +8,8 @@ import { Router, useRouter } from 'next/navigation';
 
 const Page = () => {
 
-    const backEndurl = 'https://cloudnotebook-backend.vercel.app'
+    // const backEndurl = 'https://cloudnotebook-backend.vercel.app'
+    const backEndurl = 'http://localhost:7000'
 
     const router = useRouter()
 
@@ -50,7 +51,7 @@ const Page = () => {
         e.preventDefault()
         const { email, password } = user
 
-        const res = await fetch(`https://cloudnotebook-backend.vercel.app/loginuser`, {
+        const res = await fetch(`${backEndurl}/loginuser`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -144,7 +145,7 @@ const Page = () => {
                             </button> : <button></button>}
                         </div>
                         <span className='text-xs text-end mb-3 text-blue-700 font-semibold hover:underline cursor-pointer'><Link href={'/changepassword'}>Forgot Password ?</Link></span>
-                        <button className="text-white bg-black  py-2 px-8 text-sm w-28  hover:bg-white hover:text-black border-2 border-black hover:-translate-y-2 duration-200 ease-in-out" onClick={loginUser}>Login</button>
+                        <button className="text-white bg-black  py-2 px-8 text-xs w-28  hover:bg-white hover:text-black border-2 border-black hover:-translate-y-2 duration-200 ease-in-out" onClick={loginUser}>Login</button>
                         <p className="text-xs text-gray-500 mt-3">Don&apos;t Have An Account ? <Link className='text-blue-700 cursor-pointer hover:underline font-semibold' href={'/signup'}>SignUp</Link></p>
                     </div>
                 </form >
