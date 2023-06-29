@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 const NoteBox = () => {
 
-    const backEndurl = 'https://cloudnotebook-production.up.railway.app/'
+    const backEndurl = 'https://cloudnotebook-backend.vercel.app'
 
     const [notes, setNotes] = useState([])
 
