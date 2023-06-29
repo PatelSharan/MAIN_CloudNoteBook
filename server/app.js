@@ -12,7 +12,9 @@ const fetchuser = require('./middelwares/fetchuser.js')
 
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: '*'
+}))
 
 
 //Connect With DB

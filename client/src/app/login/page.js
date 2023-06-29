@@ -50,7 +50,7 @@ const Page = () => {
         e.preventDefault()
         const { email, password } = user
 
-        const res = await fetch(`${backEndurl}/loginuser`, {
+        const res = await fetch(`https://cloudnotebook-backend.vercel.app/loginuser`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

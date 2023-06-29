@@ -7,7 +7,7 @@ import { Router, useRouter } from 'next/navigation';
 
 const Page = () => {
 
-    const backEndurl = 'https://cloudnotebook-backend-cgb2otdmn-patelsharan.vercel.app'
+    const backEndurl = 'https://cloudnotebook-backend.vercel.app'
 
 
     const router = useRouter()
