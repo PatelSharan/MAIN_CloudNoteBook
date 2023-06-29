@@ -62,7 +62,7 @@ const NoteBox = () => {
                 // const { title, body } = notes
                 return (
                     < section class="text-gray-600 body-font" >
-                        <div class="flex flex-wrap px-5 py-3 m-auto  sm:w-[80vw]" key={note.id}>
+                        <div class="flex flex-wrap px-5 py-3 m-auto  sm:w-[80vw]" key={note._id}>
                             <div class="flex border shadow-md rounded border-gray-200 p-5 sm:flex-row flex-col w-full">
                                 <div class="flex-grow">
                                     <h2 class="text-gray-900 text-lg title-font font-medium mb-3">{note.title}</h2>
