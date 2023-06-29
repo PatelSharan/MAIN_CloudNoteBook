@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
 
+  const backEndurl = 'http://localhost:7000'
+
   const [note, setNote] = useState({
     title: '', body: ''
   })
@@ -21,7 +23,7 @@ export default function Home() {
     e.preventDefault()
     const { title, body } = note
 
-    const res = await fetch('http://localhost:7000/addnote', {
+    const res = await fetch(`${backEndurl}/addnote`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
