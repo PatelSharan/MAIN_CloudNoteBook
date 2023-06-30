@@ -71,12 +71,11 @@ export default function Home() {
         title: '', body: ''
       })
     }
-
   }
 
   return (
     <>
-      <div className=" mt-10">
+      {(loginContext.isLoggedIn) ? <div className=" mt-10">
         <form action="" method="POST">
           <section className="text-gray-600 body-font">
             <div className="w-[90vw] border rounded-md sm:w-[35vw] bg-white flex flex-col md:py-8 mt-8 md:mt-0 m-auto shadow-md  p-5 sm:p-10 ">
@@ -97,7 +96,7 @@ export default function Home() {
           </section >
         </form>
         <ToastContainer />
-      </div >
+      </div > : router.push('/login')}
     </>
   )
 }
