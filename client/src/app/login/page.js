@@ -1,12 +1,17 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Link from 'next/link'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Router, useRouter } from 'next/navigation';
+import LoginContext from '@/contexts/login/logincontext';
+
 
 
 const Page = () => {
+
+    const loginContext = useContext(LoginContext)
+
 
     //Hosted backend api 
     const backEndurl = 'https://cloudnotebook-backend.vercel.app'
@@ -117,8 +122,8 @@ const Page = () => {
             })
             localStorage.setItem('token', data.jwttokens)
             setUser({ email: '', password: '' })
+            loginContext.login()
         }
-
     }
     return (
         <>

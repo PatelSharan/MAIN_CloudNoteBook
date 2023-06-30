@@ -1,10 +1,17 @@
 'use client'
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Router, useRouter } from 'next/navigation';
+import LoginContext from "@/contexts/login/logincontext";
+
 
 
 export default function Home() {
+
+  const loginContext = useContext(LoginContext)
+
+  const router = useRouter()
 
   const backEndurl = 'https://cloudnotebook-backend.vercel.app'
 
@@ -34,6 +41,9 @@ export default function Home() {
       })
     });
     const data = await res.json()
+    console.log(data.user)
+
+
     if (res.status === 422 || !data) {
       toast.error('Cannot Add Note!', {
         position: "top-right",
@@ -64,6 +74,9 @@ export default function Home() {
 
   }
 
+  if (!loginContext.isLoggedIn) {
+    router.push('/login')
+  }
   return (
     <>
       <div className=" mt-10">
@@ -73,11 +86,11 @@ export default function Home() {
               <h2 className="text-gray-900 text-2xl mb-1 font-medium title-font text-center">CloudNoteBook</h2>
               <p className="leading-relaxed mb-5 text-xs text-gray-600 text-center">Save Your Notes On Cloud</p>
               <div className="relative mb-4">
-                <label for="title" className="leading-7 text-xs text-gray-600">Title</label>
+                <label htmlFor="title" className="leading-7 text-xs text-gray-600">Title</label>
                 <input type="text" id="title" name="title" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out font-semibold" value={note.title} onChange={handleInputs} />
               </div>
               <div className="relative mb-4">
-                <label for="description" className="leading-7 text-xs text-gray-600">Description</label>
+                <label htmlFor="description" className="leading-7 text-xs text-gray-600">Description</label>
                 <textarea id="body" name="body" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-sm outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out" value={note.body} onChange={handleInputs}></textarea>
               </div>
               <div className="text-right">
