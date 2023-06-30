@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 const NoteBox = () => {
 
@@ -55,9 +56,32 @@ const NoteBox = () => {
         })
     }
 
+    const fetchednotes = () => {
+        notes.map((note) => {
+            return (
+                <section class="text-gray-600 body-font" key={note._id} >
+                    <div class="flex flex-wrap px-5 py-3 m-auto  sm:w-[80vw]">
+                        <div class="flex border shadow-md rounded border-gray-200 p-5 sm:flex-row flex-col w-full">
+                            <div class="flex-grow">
+                                <h2 class="text-gray-900 text-lg title-font font-medium mb-3">{note.title}</h2>
+                                <p class="leading-relaxed text-sm">{note.body}</p>
+                                <div className="text-right space-x-5 mt-4">
+                                    <button class="text-white bg-black border-2 border-black py-2 focus:outline-none hover:bg-white hover:text-black text-xs w-24 hover:-translate-y-2 duration-200 ease-in-out" onClick={() => { editNote(note._id) }}>Edit Note</button>
+                                    <button class="text-white bg-black border-2 border-black py-2 focus:outline-none hover:bg-white hover:text-black text-xs w-24 hover:-translate-y-2 duration-200 ease-in-out" onClick={() => { deleteNote(note._id) }}> Delete Note</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section >
+            )
+        })
+    }
+
+
+
     return (
         <>
-            {notes.map((note) => {
+            {/* {notes.map((note) => {
                 return (
                     <section class="text-gray-600 body-font" key={note._id} >
                         <div class="flex flex-wrap px-5 py-3 m-auto  sm:w-[80vw]">
@@ -74,7 +98,35 @@ const NoteBox = () => {
                         </div>
                     </section >
                 )
-            })}
+            })} */}
+
+
+
+
+
+
+
+            {(notes.length > 0) ? (notes.map((note) => {
+                return (
+                    <section class="text-gray-600 body-font" key={note._id} >
+                        <div class="flex flex-wrap px-5 py-3 m-auto  sm:w-[80vw]">
+                            <div class="flex border shadow-md rounded border-gray-200 p-5 sm:flex-row flex-col w-full">
+                                <div class="flex-grow">
+                                    <h2 class="text-gray-900 text-lg title-font font-medium mb-3">{note.title}</h2>
+                                    <p class="leading-relaxed text-sm">{note.body}</p>
+                                    <div className="text-right space-x-5 mt-4">
+                                        <button class="text-white bg-black border-2 border-black py-2 focus:outline-none hover:bg-white hover:text-black text-xs w-24 hover:-translate-y-2 duration-200 ease-in-out" onClick={() => { editNote(note._id) }}>Edit Note</button>
+                                        <button class="text-white bg-black border-2 border-black py-2 focus:outline-none hover:bg-white hover:text-black text-xs w-24 hover:-translate-y-2 duration-200 ease-in-out" onClick={() => { deleteNote(note._id) }}> Delete Note</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section >
+                )
+            })) : <div className='h-[50vh] flex flex-col items-center justify-center'>
+                <span className='mb-7 text-sm text-red-600'>There Is No Note To Display Add Note To Display Here</span>
+                <Link href={'/'}><button className='text-white bg-black border-2 border-black py-2 focus:outline-none hover:bg-white hover:text-black text-xs w-24 hover:-translate-y-2 duration-200 ease-in-out'>Add Note</button></Link>
+            </div>}
         </>
     )
 }
