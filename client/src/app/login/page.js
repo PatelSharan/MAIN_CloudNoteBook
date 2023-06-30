@@ -122,6 +122,8 @@ const Page = () => {
             })
             localStorage.setItem('token', data.jwttokens)
             setUser({ email: '', password: '' })
+
+            //change loginState when use Login
             loginContext.login()
         }
     }
