@@ -1,6 +1,10 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const NoteBox = () => {
 
@@ -8,7 +12,10 @@ const NoteBox = () => {
 
     const [notes, setNotes] = useState([])
 
+    const [editedNote, setEditedNote] = useState({ id: '', title: '', body: '' });
 
+
+    //Fetch All Notes
     const fetchNotes = async (url) => {
         try {
             const res = await fetch(url, {
@@ -30,6 +37,8 @@ const NoteBox = () => {
         fetchNotes(`${backEndurl}/getnotes`)
     }, [])
 
+
+    //Delete Specific Note
     const deleteNote = async (id) => {
         let result = confirm('Are Your Sure You Want To Delete Note')
         if (result) {
@@ -41,28 +50,81 @@ const NoteBox = () => {
             })
             let newNote = notes.filter((notes) => { return notes._id !== id })
             setNotes(newNote)
+            toast.success('Note Deleted Successfully...', {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light"
+            })
         }
     }
 
 
+
+    //Edit Specific Note
     const editNote = async (id) => {
-
-        const { title, body } = notes
-
-        const res = await fetch(`${backEndurl}/updatenote/${id}`, {
-            method: 'PUT',
-            headers: {
-                "Content-Type": "application/json",
-                'jwt-token': localStorage.getItem('token')
-            },
-            body: JSON.stringify({
-                title, body
-            })
-        })
-        const data = await res.json()
-        console.log(data)
+        const noteToEdit = notes.find((note) => note._id === id);
+        setEditedNote({
+            id: noteToEdit._id,
+            title: noteToEdit.title,
+            body: noteToEdit.body
+        });
     }
 
+    const handleInputChange = (e) => {
+        setEditedNote({
+            ...editedNote,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    const saveChanges = async (e) => {
+        e.preventDefault()
+        const { id, title, body } = editedNote;
+        try {
+            const res = await fetch(`${backEndurl}/updatenote/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'jwt-token': localStorage.getItem('token'),
+                },
+                body: JSON.stringify({ title, body }),
+            });
+            if (res.ok) {
+                const updatedNote = { ...editedNote };
+                const updatedNotes = notes.map((note) => {
+                    if (note._id === updatedNote.id) {
+                        return { ...note, ...updatedNote };
+                    }
+                    return note;
+                });
+                setNotes(updatedNotes);
+                setEditedNote({ id: '', title: '', body: '' });
+                toast.success('Note Edited Successfully...', {
+                    position: "top-right",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light"
+                })
+            } else {
+                console.error('Failed to update note:', res.status, res.statusText);
+            }
+        } catch (error) {
+            console.error('Failed to update note:', error.message);
+        }
+    };
+
+    const cancelEdit = () => {
+        setEditedNote({ id: '', title: '', body: '' });
+    };
 
     return (
         <>
@@ -82,6 +144,7 @@ const NoteBox = () => {
                                 </div>
                             </div>
                         </div>
+                        <ToastContainer />
                     </section >
                 )
             })) :
@@ -96,6 +159,36 @@ const NoteBox = () => {
                     <Link href={'/'}><button className='text-white bg-black border-2 border-black py-2 focus:outline-none hover:bg-white hover:text-black text-xs w-24 hover:-translate-y-2 duration-200 ease-in-out'>Add Note</button></Link>
                 </div>
             }
+
+
+            {/* <------- When User Want To Edit note */}
+            {editedNote.id && (
+                <div className='h-[100vh] w-[100vw] fixed top-0 backdrop-blur-md'>
+                    <div className="my-10">
+                        <form action="" method="POST">
+                            <section className="text-gray-600 body-font">
+                                <div className="w-[90vw] border rounded-md sm:w-[32vw] bg-white flex flex-col md:py-8 mt-8 md:mt-0 m-auto shadow-md  p-5 sm:p-10 ">
+                                    <h2 className="text-gray-900 text-2xl mb-1 font-medium title-font text-center">Update Note</h2>
+                                    <div className="relative mb-4">
+                                        <label for="title" className="leading-7 text-xs text-gray-600">Title</label>
+                                        <input type="text" id="title" name="title" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out font-semibold" value={editedNote.title} onChange={handleInputChange} />
+                                    </div>
+                                    <div className="relative mb-4">
+                                        <label for="description" className="leading-7 text-xs text-gray-600">Description</label>
+                                        <textarea id="body" name="body" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-sm outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out" value={editedNote.body} onChange={handleInputChange}></textarea>
+                                    </div>
+                                    <div className="text-right space-x-4">
+                                        <button type='submit' className="text-white bg-black border-2 border-black py-2 px-6 focus:outline-none hover:bg-white hover:text-black text-xs w-32 hover:-translate-y-2 duration-200 ease-in-out" onClick={saveChanges}>Update Note</button>
+                                        <button type='submit' className="text-white bg-black border-2 border-black py-2 px-6 focus:outline-none hover:bg-white hover:text-black text-xs w-32 hover:-translate-y-2 duration-200 ease-in-out" onClick={cancelEdit}>Cancel</button>
+                                    </div>
+                                </div>
+                                <ToastContainer />
+                            </section >
+                        </form>
+                    </div >
+                </div>
+            )}
+
         </>
     )
 }
