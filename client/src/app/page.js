@@ -74,9 +74,6 @@ export default function Home() {
 
   }
 
-  if (!loginContext.isLoggedIn) {
-    router.push('/login')
-  }
   return (
     <>
       <div className=" mt-10">
