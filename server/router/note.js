@@ -35,11 +35,13 @@ router.put('/updatenote/:id', async (req, res) => {
         if (!findNoteById) {
             return res.status(404).json('Item not found');
         }
-        findNoteById.title = req.body.title
-        findNoteById.body = req.body.body
+        else {
+            findNoteById.title = req.body.title
+            findNoteById.body = req.body.body
 
-        const result = await findNoteById.save()
-        res.json(result);
+            const result = await findNoteById.save()
+            res.json(result);
+        }
     } catch (error) {
         res.send('Cannot Update note')
     }

@@ -8,6 +8,7 @@ const NoteBox = () => {
 
     const [notes, setNotes] = useState([])
 
+
     const fetchNotes = async (url) => {
         try {
             const res = await fetch(url, {
@@ -46,6 +47,8 @@ const NoteBox = () => {
 
     const editNote = async (id) => {
 
+        const { title, body } = notes
+
         const res = await fetch(`${backEndurl}/updatenote/${id}`, {
             method: 'PUT',
             headers: {
@@ -65,11 +68,12 @@ const NoteBox = () => {
         <>
             {(notes.length > 0) ? (notes.map((note) => {
                 return (
+
                     <section className="text-gray-600 body-font" key={note._id} >
                         <div className="flex flex-wrap px-5 py-3 m-auto  sm:w-[80vw]">
                             <div className="flex border shadow-md rounded border-gray-200 p-5 sm:flex-row flex-col w-full">
                                 <div className="flex-grow">
-                                    <h2 className="text-gray-900 text-lg title-font font-medium mb-3" >{note.title}</h2>
+                                    <h2 className="text-gray-900 text-lg title-font font-medium mb-3">{note.title}</h2>
                                     <p className="leading-relaxed text-sm">{note.body}</p>
                                     <div className="text-right space-x-5 mt-4">
                                         <button className="text-white bg-black border-2 border-black py-2 focus:outline-none hover:bg-white hover:text-black text-xs w-24 hover:-translate-y-2 duration-200 ease-in-out" onClick={() => { editNote(note._id) }}>Edit Note</button>
