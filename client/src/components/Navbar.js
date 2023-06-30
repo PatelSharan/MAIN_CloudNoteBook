@@ -1,9 +1,12 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { Router, useRouter } from 'next/navigation';
+
 
 const Navbar = () => {
 
+    const router = useRouter()
 
     const [userLogin, setUserLogin] = useState(false)
 
@@ -20,6 +23,7 @@ const Navbar = () => {
     const handleLogout = () => {
         localStorage.clear('token')
         setUserLogin(false)
+        router.push('/login')
     }
 
 

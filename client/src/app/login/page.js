@@ -127,11 +127,11 @@ const Page = () => {
                     <div className="rounded-lg p-4 flex flex-col m-auto mt-10 md:mt-0 sm:w-[80vw]">
                         <h2 className="text-gray-900 text-2xl font-medium title-font mb-5">Login</h2>
                         <div className="relative mb-4">
-                            <label for="email" className="leading-7 text-xs text-gray-600">Email</label>
+                            <label htmlFor="email" className="leading-7 text-xs text-gray-600">Email</label>
                             <input type="email" id="email" value={user.email} name="email" className="w-full bg-white border-b-2 border-black focus:border-b-blue-700  text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out mb-3" onChange={handleInputs} />
                         </div>
                         <div className="relative mb-4">
-                            <label for="password" className="leading-7 text-xs text-gray-600">Password</label>
+                            <label htmlFor="password" className="leading-7 text-xs text-gray-600">Password</label>
                             <input type={showPassword ? 'text' : 'password'} id="password" value={user.password} name="password" className="w-full bg-white border-b-2 border-black focus:border-b-blue-700  text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out mb-3" onChange={mulEvents} />
                             {/* If Password has Value then Login */}
                             {passValue ? <button onClick={handleEventPreventDefaulf}>
