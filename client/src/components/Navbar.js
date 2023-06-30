@@ -1,33 +1,12 @@
 'use client'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import Link from 'next/link'
-import { Router, useRouter } from 'next/navigation';
 import LoginContext from '@/contexts/login/logincontext';
 
 
 const Navbar = () => {
 
     const loginContext = useContext(LoginContext)
-
-    // const router = useRouter()
-
-    // const [userLogin, setUserLogin] = useState(false)
-
-
-    // useEffect(() => {
-    //     const token = localStorage.getItem('token')
-    //     console.log('in navbar console token is : ', token)
-    //     if (token) {
-    //         setUserLogin(true)
-    //     }
-    // }, []);
-
-
-    // const handleLogout = () => {
-    //     localStorage.clear('token')
-    //     setUserLogin(false)
-    //     router.push('/login')
-    // }
 
 
     return (
