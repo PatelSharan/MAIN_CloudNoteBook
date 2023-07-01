@@ -9,7 +9,7 @@ const { check, validationResult } = require('express-validator');
 
 
 router.get('/', (req, res) => {
-    res.send('Server....')
+    res.send('Server.....')
 })
 
 
