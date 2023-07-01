@@ -32,7 +32,6 @@ const Navbar = () => {
                     <div className='absolute right-3 space-x-3'>
                         <button className='py-[6px] w-16 bg-gray-200 text-black text-sm border border-white hover:bg-black hover:text-white' onClick={loginContext.logout}>Logout</button>
                     </div>}
-
             </ul >
         </nav >
 

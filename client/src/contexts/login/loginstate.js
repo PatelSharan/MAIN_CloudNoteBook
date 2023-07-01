@@ -1,11 +1,11 @@
 'use client'
-import React, { useState } from 'react'
-import LoginContext from './logincontext'
+import React, { useState, useEffect } from 'react';
+import LoginContext from './logincontext';
 import { Router, useRouter } from 'next/navigation';
 
 
 const LoginState = (props) => {
-    const router = useRouter()
+    const router = useRouter();
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -14,10 +14,17 @@ const LoginState = (props) => {
     };
 
     const logout = () => {
-        localStorage.clear('token')
+        localStorage.removeItem('token');
         setIsLoggedIn(false);
-        router.push('/login')
+        router.push('/login');
     };
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, []);
 
     return (
         <LoginContext.Provider value={{ isLoggedIn, login, logout }}>
@@ -26,5 +33,4 @@ const LoginState = (props) => {
     );
 };
 
-
-export default LoginState
+export default LoginState;
