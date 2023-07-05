@@ -115,7 +115,7 @@ router.post('/loginuser', async (req, res) => {
 })
 
 
-router.post('/forgot-password', (req, res) => {
+router.post('/user-profile-photo', (req, res) => {
 
 })
 
@@ -123,8 +123,6 @@ router.post('/getuser', fetchuser, async (req, res) => {
     try {
 
         userId = await req.userId
-        console.log(userId)
-
         const user = await User.findById(userId).select('-password')
         res.send(user)
     } catch (error) {
