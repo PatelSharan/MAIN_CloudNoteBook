@@ -115,7 +115,7 @@ router.post('/loginuser', async (req, res) => {
 })
 
 
-router.post('/user-profile-photo', (req, res) => {
+router.post('/changepassword', (req, res) => {
 
 })
 

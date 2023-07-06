@@ -26,7 +26,7 @@ connectDB(DB_URL)
 app.get('/', routerUser)
 app.post('/registeruser', routerUser)
 app.post('/loginuser', routerUser)
-app.post('/user-profile-photo', routerUser)
+app.post('/changepassword', routerUser)
 app.post('/getuser', fetchuser, routerUser)
 
 
