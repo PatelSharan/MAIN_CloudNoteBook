@@ -5,11 +5,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Router, useRouter } from 'next/navigation';
 import LoginContext from '@/contexts/login/logincontext';
+import LoadingContext from '@/contexts/loading/LoadingContext';
+import Loading from '@/components/Loading';
 
 
 const Page = () => {
 
     const loginContext = useContext(LoginContext)
+    const loadingContext = useContext(LoadingContext)
 
     //Hosted backend api 
     const backEndurl = 'https://cloudnotebook-backend.vercel.app'
@@ -20,7 +23,6 @@ const Page = () => {
 
     const router = useRouter()
 
-    const [loading, setLoading] = useState(false);
 
     const [showPassword, setShowPassword] = useState(false)
 
@@ -62,7 +64,7 @@ const Page = () => {
         e.preventDefault()
         const { name, email, password } = user
 
-        setLoading(true);
+        loadingContext.setIsLoading(true);
 
         const res = await fetch(`${backEndurl}/registeruser`, {
             method: 'POST',
@@ -76,7 +78,7 @@ const Page = () => {
 
         const data = await res.json()
 
-        setLoading(false);
+        loadingContext.setIsLoading(false);
 
         let errMessageFromValidation
         if (data.errors && data.errors.length > 0) {
@@ -146,14 +148,8 @@ const Page = () => {
         <>
             <section className="text-gray-600 body-font px-5 py-12">
                 <form action="" method='POST'>
-                    {loading ? (
-                        <div className='w-screen h-[70vh] flex flex-col justify-center items-center'>
-                            <div className="flex justify-center items-center h-screen flex-col">
-                                {/* Loading Spinner */}
-                                <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-b-4 border-gray-900"></div>
-                                <span className="text-gray-500 mt-3 text-sm">Creating A User...</span>
-                            </div>
-                        </div>
+                    {loadingContext.isLoading ? (
+                        <Loading message={'Creating A User...'} />
                     ) :
                         <div className="rounded-lg p-4 flex flex-col m-auto mt-10 md:mt-0 sm:w-[80vw]">
                             <h2 className="text-gray-900 text-2xl font-medium title-font mb-5">Sign Up</h2>

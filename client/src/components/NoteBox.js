@@ -1,16 +1,17 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import LoadingContext from '@/contexts/loading/LoadingContext';
+import Loading from './Loading';
 
 
 const NoteBox = () => {
 
-    const backEndurl = 'https://cloudnotebook-backend.vercel.app'
+    const loadingContext = useContext(LoadingContext)
 
-    const [loading, setLoading] = useState(false);
+    const backEndurl = 'https://cloudnotebook-backend.vercel.app'
 
     const [notes, setNotes] = useState([])
 
@@ -20,7 +21,7 @@ const NoteBox = () => {
     //Fetch All Notes
     const fetchNotes = async (url) => {
 
-        setLoading(true);
+        loadingContext.setIsLoading(true);
 
         try {
             const res = await fetch(url, {
@@ -37,9 +38,10 @@ const NoteBox = () => {
             console.error(error.message)
         }
         finally {
-            setLoading(false);
+            loadingContext.setIsLoading(false);
         }
     }
+
 
     useEffect(() => {
         fetchNotes(`${backEndurl}/getnotes`)
@@ -137,14 +139,8 @@ const NoteBox = () => {
     return (
         <>
             {/* when User has any note */}
-            {loading ? (
-                <div className='w-screen h-[70vh] flex flex-col justify-center items-center'>
-                    <div className="flex justify-center items-center h-screen flex-col">
-                        {/* Loading Spinner */}
-                        <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-b-4 border-gray-900"></div>
-                        <span className="text-gray-500 mt-3 text-sm">Loading...</span>
-                    </div>
-                </div>
+            {loadingContext.isLoading ? (
+                <Loading message={'Loading...'} />
 
             ) : (
                 <>

@@ -5,12 +5,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Router, useRouter } from 'next/navigation';
 import LoginContext from '@/contexts/login/logincontext';
-
+import LoadingContext from '@/contexts/loading/LoadingContext';
+import Loading from '@/components/Loading';
 
 
 const Page = () => {
 
     const loginContext = useContext(LoginContext)
+    const loadingcontext = useContext(LoadingContext)
 
     //Hosted backend api 
     const backEndurl = 'https://cloudnotebook-backend.vercel.app'
@@ -22,7 +24,7 @@ const Page = () => {
 
     const [showPassword, setShowPassword] = useState(false)
 
-    const [loading, setLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false)
 
     const [passValue, setPassValue] = useState('')
 
@@ -60,7 +62,7 @@ const Page = () => {
         e.preventDefault()
         const { email, password } = user
 
-        setLoading(true);
+        loadingcontext.setIsLoading(true);
 
         const res = await fetch(`${backEndurl}/loginuser`, {
             method: 'POST',
@@ -73,7 +75,7 @@ const Page = () => {
         });
         const data = await res.json()
 
-        setLoading(false);
+        loadingcontext.setIsLoading(false);
 
         if (res.status === 422 || !data) {
             toast.error('Fill Details Properly!', {
@@ -136,14 +138,8 @@ const Page = () => {
         <>
             <section className="text-gray-600 body-font px-5 py-12">
                 <form action="" method='POST'>
-                    {loading ? (
-                        <div className='w-screen h-[70vh] flex flex-col justify-center items-center'>
-                            <div className="flex justify-center items-center h-screen flex-col">
-                                {/* Loading Spinner */}
-                                <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-b-4 border-gray-900"></div>
-                                <span className="text-gray-500 mt-3 text-sm">Verifying A User...</span>
-                            </div>
-                        </div>
+                    {loadingcontext.isLoading ? (
+                        <Loading message={'Verifying A User...'} />
                     ) : <div className="rounded-lg p-4 flex flex-col m-auto mt-10 md:mt-0 sm:w-[80vw]">
                         <h2 className="text-gray-900 text-2xl font-medium title-font mb-5">Login</h2>
                         <div className="relative mb-4">
