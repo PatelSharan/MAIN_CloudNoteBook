@@ -138,13 +138,10 @@ const Page = () => {
                 <form action="" method='POST'>
                     {loading ? (
                         <div className='w-screen h-[70vh] flex flex-col justify-center items-center'>
-                            <div className="flex flex-col items-center space-x-2">
+                            <div className="flex justify-center items-center h-screen flex-col">
                                 {/* Loading Spinner */}
-                                <svg className="animate-spin h-10 w-10 text-black" viewBox="0 0 24 24">
-                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647zM12 20a8 8 0 01-8-8H0c0 6.627 5.373 12 12 12v-4zm8-7.291A7.962 7.962 0 0116 12h-4v4c3.042 0 5.824-1.135 7.938-3l-2.647-3z" />
-                                </svg>
-                                <span className="text-gray-500 mt-2">Verifying A User...</span>
+                                <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-b-4 border-gray-900"></div>
+                                <span className="text-gray-500 mt-3 text-sm">Verifying A User...</span>
                             </div>
                         </div>
                     ) : <div className="rounded-lg p-4 flex flex-col m-auto mt-10 md:mt-0 sm:w-[80vw]">
