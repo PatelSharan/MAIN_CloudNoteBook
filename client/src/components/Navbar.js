@@ -1,7 +1,7 @@
 'use client'
 import React, { useContext, useState } from 'react'
 import Link from 'next/link'
-import LoginContext from '@/contexts/login/logincontext';
+import LoginContext from '@/contexts/login/LoginContext';
 
 
 const Navbar = () => {
