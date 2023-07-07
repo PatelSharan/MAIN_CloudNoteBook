@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Router, useRouter } from 'next/navigation';
-import LoginContext from '@/contexts/login/LoginContex';
+import LoginContext from '@/contexts/login/logincontext';
 
 
 const Page = () => {
