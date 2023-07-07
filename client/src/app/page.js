@@ -3,7 +3,7 @@ import { useContext, useState } from "react"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Router, useRouter } from 'next/navigation';
-import LoginContext from "@/contexts/login/LoginContext";
+import LoginContext from "@/contexts/login/LoginContex";
 import Link from "next/link";
 
 
