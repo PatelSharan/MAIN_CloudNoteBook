@@ -10,6 +10,8 @@ const NoteBox = () => {
 
     const backEndurl = 'https://cloudnotebook-backend.vercel.app'
 
+    const [loading, setLoading] = useState(false);
+
     const [notes, setNotes] = useState([])
 
     const [editedNote, setEditedNote] = useState({ id: '', title: '', body: '' });
@@ -17,6 +19,9 @@ const NoteBox = () => {
 
     //Fetch All Notes
     const fetchNotes = async (url) => {
+
+        setLoading(true);
+
         try {
             const res = await fetch(url, {
                 headers: {
@@ -30,6 +35,9 @@ const NoteBox = () => {
 
         } catch (error) {
             console.error(error.message)
+        }
+        finally {
+            setLoading(false);
         }
     }
 
@@ -129,38 +137,55 @@ const NoteBox = () => {
     return (
         <>
             {/* when User has any note */}
-            {(notes.length > 0) ? (notes.map((note) => {
-                return (
-
-                    <section className="text-gray-600 body-font" key={note._id} >
-                        <div className="flex flex-wrap px-5 py-3 m-auto  sm:w-[80vw]">
-                            <div className="flex border shadow-md rounded border-gray-200 p-5 sm:flex-row flex-col w-full">
-                                <div className="flex-grow">
-                                    <h2 className="text-gray-900 text-lg title-font font-medium mb-3">{note.title}</h2>
-                                    <p className="leading-relaxed text-sm">{note.body}</p>
-                                    <div className="text-right space-x-5 mt-4">
-                                        <button className="text-white bg-black border-2 border-black py-2 focus:outline-none hover:bg-white hover:text-black text-xs w-24 hover:-translate-y-2 duration-200 ease-in-out" onClick={() => { editNote(note._id) }}>Edit Note</button>
-                                        <button className="text-white bg-black border-2 border-black py-2 focus:outline-none hover:bg-white hover:text-black text-xs w-24 hover:-translate-y-2 duration-200 ease-in-out" onClick={() => { deleteNote(note._id) }}> Delete Note</button>
+            {loading ? (
+                <div className="flex justify-center items-center h-[70vh]">
+                    <div className="flex flex-col items-center space-x-2">
+                        {/* Loading Spinner */}
+                        <svg className="animate-spin h-10 w-10 text-black" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 004 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647zM12 20a8 8 0 01-8-8H0c0 6.627 5.373 12 12 12v-4zm8-7.291A7.962 7.962 0 0116 12h-4v4c3.042 0 5.824-1.135 7.938-3l-2.647-3z" />
+                        </svg>
+                        <span className="text-gray-500 mt-2">Loading...</span>
+                    </div>
+                </div>
+            ) : (
+                <>
+                    {/* When User has any note */}
+                    {notes.length > 0 ? (
+                        notes.map((note) => (
+                            <section className="text-gray-600 body-font" key={note._id}>
+                                <div className="flex flex-wrap px-5 py-3 m-auto sm:w-[80vw]">
+                                    <div className="flex border shadow-md rounded border-gray-200 p-5 sm:flex-row flex-col w-full">
+                                        <div className="flex-grow">
+                                            <h2 className="text-gray-900 text-lg title-font font-medium mb-3">{note.title}</h2>
+                                            <p className="leading-relaxed text-sm">{note.body}</p>
+                                            <div className="text-right space-x-5 mt-4">
+                                                <button className="text-white bg-black border-2 border-black py-2 focus:outline-none hover:bg-white hover:text-black text-xs w-24 hover:-translate-y-2 duration-200 ease-in-out" onClick={() => { editNote(note._id) }}>Edit Note</button>
+                                                <button className="text-white bg-black border-2 border-black py-2 focus:outline-none hover:bg-white hover:text-black text-xs w-24 hover:-translate-y-2 duration-200 ease-in-out" onClick={() => { deleteNote(note._id) }}> Delete Note</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                <ToastContainer />
+                            </section>
+                        ))
+                    ) : (
+                        // User does not have any note
+                        <div className="h-[80vh] flex flex-col justify-center items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" className="bi bi-lightbulb" viewBox="0 0 16 16">
+                                <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z" />
+                            </svg>
+                            <div className='my-4 px-4'>
+                                <p>There are no notes to display.</p>
+                                <p>Notes you add will appear here.</p>
                             </div>
+                            <Link href={'/'}><button className='text-white bg-black border-2 border-black py-2 focus:outline-none hover:bg-white hover:text-black text-xs w-24 hover:-translate-y-2 duration-200 ease-in-out'>Add Note</button></Link>
                         </div>
-                        <ToastContainer />
-                    </section >
-                )
-            })) :
-                //<----- user does not have any note
-                <div className='h-[80vh] flex flex-col justify-center items-center'>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" className="bi bi-lightbulb" viewBox="0 0 16 16">
-                        <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z" />
-                    </svg>
-                    <div className='my-4 px-4'>
-                        <p>There is No Notes To Display,</p>
-                        <p>Notes You Add Appear Here.</p>
-                    </div>
-                    <Link href={'/'}><button className='text-white bg-black border-2 border-black py-2 focus:outline-none hover:bg-white hover:text-black text-xs w-24 hover:-translate-y-2 duration-200 ease-in-out'>Add Note</button></Link>
-                </div>
-            }
+                    )}
+                </>
+            )}
+
+
 
 
             {/* <------- When User Want To Edit note */}

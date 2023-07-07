@@ -12,7 +12,6 @@ const Page = () => {
 
     const loginContext = useContext(LoginContext)
 
-
     //Hosted backend api 
     const backEndurl = 'https://cloudnotebook-backend.vercel.app'
 
@@ -22,6 +21,8 @@ const Page = () => {
     const router = useRouter()
 
     const [showPassword, setShowPassword] = useState(false)
+
+    const [loading, setLoading] = useState(false);
 
     const [passValue, setPassValue] = useState('')
 
@@ -59,6 +60,8 @@ const Page = () => {
         e.preventDefault()
         const { email, password } = user
 
+        setLoading(true);
+
         const res = await fetch(`${backEndurl}/loginuser`, {
             method: 'POST',
             headers: {
@@ -69,6 +72,8 @@ const Page = () => {
             })
         });
         const data = await res.json()
+
+        setLoading(false);
 
         if (res.status === 422 || !data) {
             toast.error('Fill Details Properly!', {
@@ -131,7 +136,18 @@ const Page = () => {
         <>
             <section className="text-gray-600 body-font px-5 py-12">
                 <form action="" method='POST'>
-                    <div className="rounded-lg p-4 flex flex-col m-auto mt-10 md:mt-0 sm:w-[80vw]">
+                    {loading ? (
+                        <div className='w-screen h-[70vh] flex flex-col justify-center items-center'>
+                            <div className="flex flex-col items-center space-x-2">
+                                {/* Loading Spinner */}
+                                <svg className="animate-spin h-10 w-10 text-black" viewBox="0 0 24 24">
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647zM12 20a8 8 0 01-8-8H0c0 6.627 5.373 12 12 12v-4zm8-7.291A7.962 7.962 0 0116 12h-4v4c3.042 0 5.824-1.135 7.938-3l-2.647-3z" />
+                                </svg>
+                                <span className="text-gray-500 mt-2">Verifying A User...</span>
+                            </div>
+                        </div>
+                    ) : <div className="rounded-lg p-4 flex flex-col m-auto mt-10 md:mt-0 sm:w-[80vw]">
                         <h2 className="text-gray-900 text-2xl font-medium title-font mb-5">Login</h2>
                         <div className="relative mb-4">
                             <label htmlFor="email" className="leading-7 text-xs text-gray-600">Email</label>
@@ -156,6 +172,7 @@ const Page = () => {
                         <button className="text-white bg-black  py-2 px-8 text-sm w-28  hover:bg-white hover:text-black border-2 border-black hover:-translate-y-2 duration-200 ease-in-out" onClick={loginUser}>Login</button>
                         <p className="text-xs text-gray-500 mt-3">Don&apos;t Have An Account ? <Link className='text-blue-700 cursor-pointer hover:underline font-semibold' href={'/signup'}>SignUp</Link></p>
                     </div>
+                    }
                 </form >
                 <ToastContainer />
             </section >
