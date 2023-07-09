@@ -40,7 +40,9 @@ const Navbar = () => {
                                 </li>
                                 <li className=''>
                                     <Link href={'/'}>
-                                        <button className='w-[100%] py-2 px-3 text-left rounded-lg hover:bg-gray-100 hover:text-black flex'>
+                                        <button className={`w-[100%] py-1 mb-3 px-3 text-left  flex border-b-2 ${loginContext.activeLink === '/' ? 'border-b-blue-600' : 'border-b-2'
+                                            }`}
+                                            onClick={() => loginContext.setActiveLink('/')}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-house-door-fill" viewBox="0 0 16 16">
                                                 <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
                                             </svg>
@@ -50,7 +52,9 @@ const Navbar = () => {
                                 </li>
                                 <li>
                                     <Link href={'/notes'}>
-                                        <button className='w-[100%] py-2 px-3 text-left rounded-lg hover:bg-gray-100 hover:text-black flex'>
+                                        <button className={`w-[100%] py-1 mb-3 px-3 text-left  flex border-b-2 ${loginContext.activeLink === '/notes' ? 'border-b-blue-600' : 'border-b-2'
+                                            }`}
+                                            onClick={() => loginContext.setActiveLink('/notes')}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-stickies-fill mt-1" viewBox="0 0 16 16">
                                                 <path d="M0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5A1.5 1.5 0 0 0 0 1.5z" />
                                                 <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zm6 8.5a1 1 0 0 1 1-1h4.396a.25.25 0 0 1 .177.427l-5.146 5.146a.25.25 0 0 1-.427-.177V10.5z" />

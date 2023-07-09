@@ -17,6 +17,9 @@ const LoginState = (props) => {
     //show Profile section
     const [showProfile, setShowProfile] = useState(false)
 
+    // Set the active link state
+    const [activeLink, setActiveLink] = useState('/');
+
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const [userDetails, setUserDetails] = useState({ name: '', email: '' })
@@ -63,7 +66,7 @@ const LoginState = (props) => {
     }, []);
 
     return (
-        <LoginContext.Provider value={{ isLoggedIn, login, logout, setShowProfile, showProfile, setUserDetails, userDetails }}>
+        <LoginContext.Provider value={{ isLoggedIn, login, logout, setShowProfile, showProfile, setUserDetails, userDetails, activeLink, setActiveLink }}>
             {props.children}
         </LoginContext.Provider>
     );
