@@ -76,47 +76,10 @@ const Page = () => {
         const data = await res.json()
 
         loadingcontext.setIsLoading(false);
-
-        if (res.status === 422 || !data) {
-            toast.error('Fill Details Properly!', {
+        if (res.status === 200) {
+            toast.success('Logged In Successfully!', {
                 position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-        }
-        else if (res.status === 401 || !data) {
-            toast.error('Invalid Details !', {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-        }
-        else if (res.status === 400 || !data) {
-            toast.error('User Not Exist!', {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-        }
-        else {
-            toast.success('Login Successfully..!', {
-                position: "top-right",
-                autoClose: 1000,
+                autoClose: 500,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -124,14 +87,23 @@ const Page = () => {
                 progress: undefined,
                 theme: "light",
                 onClose: () => {
-                    router.push('/')
-                },
-            })
+                    router.push('/');
+                }
+            });
             localStorage.setItem('token', data.jwttokens)
-            setUser({ email: '', password: '' })
-
-            //change loginState when use Login
-            loginContext.login()
+            setUser({ email: '', password: '' });
+            loginContext.login();
+        } else {
+            toast.error(data, {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
     }
     return (

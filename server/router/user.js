@@ -31,7 +31,7 @@ router.post('/registeruser', [
 
             //If name, email, and password not enterd
             if (!name || !email || !password) {
-                res.status(422).json('please fill details')
+                res.status(422).json('Please Fill Details')
             }
             else {
 
@@ -76,7 +76,7 @@ router.post('/loginuser', async (req, res) => {
 
         //If email and password not enterd
         if (!email || !password) {
-            return res.status(422).json({ error: "Please fill details" })
+            return res.status(422).json("Please Fill Details")
         }
         else {
 
@@ -92,7 +92,7 @@ router.post('/loginuser', async (req, res) => {
                 if (matchPassword) {
                     res.status(200).send(findUser)
                 } else {
-                    res.status(401).json('login failed')
+                    res.status(401).json('Invalid Details')
                 }
 
 

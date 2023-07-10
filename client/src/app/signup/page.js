@@ -96,34 +96,10 @@ const Page = () => {
             return errMessageFromValidation
         }
 
-        if (res.status === 422 || !data) {
-            toast.error('Fill Details Properly!', {
+        else if (res.status === 200) {
+            toast.success('SignUp Successfully!', {
                 position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-        }
-        else if (res.status === 400 || !data) {
-            toast.error('Email Already Exist!', {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-        }
-        else {
-            toast.success('User Registered Successfully..!', {
-                position: "top-right",
-                autoClose: 1000,
+                autoClose: 500,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -131,15 +107,68 @@ const Page = () => {
                 progress: undefined,
                 theme: "light",
                 onClose: () => {
-                    router.push('/')
+                    router.push('/');
                 }
-            })
+            });
             localStorage.setItem('token', data.jwttokens)
-            setUser({ name: '', email: '', password: '' })
-
-            //change loginState when use Created
-            loginContext.login()
+            setUser({ email: '', password: '' });
+            loginContext.login();
+        } else {
+            toast.error(data, {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
+
+        // if (res.status === 422 || !data) {
+        //     toast.error('Fill Details Properly!', {
+        //         position: "top-right",
+        //         autoClose: 2000,
+        //         hideProgressBar: false,
+        //         closeOnClick: true,
+        //         pauseOnHover: true,
+        //         draggable: true,
+        //         progress: undefined,
+        //         theme: "light",
+        //     });
+        // }
+        // else if (res.status === 400 || !data) {
+        //     toast.error('Email Already Exist!', {
+        //         position: "top-right",
+        //         autoClose: 2000,
+        //         hideProgressBar: false,
+        //         closeOnClick: true,
+        //         pauseOnHover: true,
+        //         draggable: true,
+        //         progress: undefined,
+        //         theme: "light",
+        //     });
+        // }
+        // else {
+        //     toast.success('User Registered Successfully..!', {
+        //         position: "top-right",
+        //         autoClose: 1000,
+        //         hideProgressBar: false,
+        //         closeOnClick: true,
+        //         pauseOnHover: true,
+        //         draggable: true,
+        //         progress: undefined,
+        //         theme: "light",
+        //         onClose: () => {
+        //             router.push('/')
+        //         }
+        //     })
+        //     localStorage.setItem('token', data.jwttokens)
+        //     setUser({ name: '', email: '', password: '' })
+
+        //     //change loginState when use Created
+        //     loginContext.login()
 
 
     }
