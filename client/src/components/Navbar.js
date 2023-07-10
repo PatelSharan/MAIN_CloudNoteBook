@@ -11,7 +11,7 @@ const Navbar = () => {
     const loginContext = useContext(LoginContext)
 
     return (
-        <nav className='border-b borderx bg-black text-gray-200 h-16 '>
+        <nav className='bg-black text-gray-200 h-16 '>
             <ul className='flex h-[100%] items-center'>
 
                 {/* To open Navbar */}
@@ -23,7 +23,7 @@ const Navbar = () => {
                 </div>
 
                 {/*<---- Responsive Navbar */}
-                {showNavbar && <div className='fixed w-[100vw] h-[100vh] top-0 left-0 z-10 backdrop-blur-sm'>
+                {showNavbar && <div className='fixed w-[100vw] h-[100vh] top-0 left-0 z-10'>
                     <div className='fixed top-0 left-0 z-10'>
                         <div className='w-64 h-[100vh] bg-black shadow-md flex flex-col items-center p-5'>
                             <div className='absolute top-4 left-4 sm:right-6'>
