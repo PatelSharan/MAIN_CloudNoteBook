@@ -35,7 +35,7 @@ const Navbar = () => {
                                 </li>
                                 <li className=''>
                                     <Link href={'/'}>
-                                        <button className={`w-[100%] py-1 mb-3 px-3 text-left  flex  ${loginContext.activeLink === '/' ? 'text-white' : 'hover:textw'
+                                        <button className={`w-[100%] py-1 mb-3 px-3 text-left  flex  ${loginContext.activeLink === '/' ? 'text-white' : 'hover:text-white'
                                             }`}
                                             onClick={() => loginContext.setActiveLink('/')}>
                                             <span className='ml-4'>Home</span>
