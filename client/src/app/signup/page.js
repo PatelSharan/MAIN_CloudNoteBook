@@ -125,52 +125,6 @@ const Page = () => {
                 theme: "light",
             });
         }
-
-        // if (res.status === 422 || !data) {
-        //     toast.error('Fill Details Properly!', {
-        //         position: "top-right",
-        //         autoClose: 2000,
-        //         hideProgressBar: false,
-        //         closeOnClick: true,
-        //         pauseOnHover: true,
-        //         draggable: true,
-        //         progress: undefined,
-        //         theme: "light",
-        //     });
-        // }
-        // else if (res.status === 400 || !data) {
-        //     toast.error('Email Already Exist!', {
-        //         position: "top-right",
-        //         autoClose: 2000,
-        //         hideProgressBar: false,
-        //         closeOnClick: true,
-        //         pauseOnHover: true,
-        //         draggable: true,
-        //         progress: undefined,
-        //         theme: "light",
-        //     });
-        // }
-        // else {
-        //     toast.success('User Registered Successfully..!', {
-        //         position: "top-right",
-        //         autoClose: 1000,
-        //         hideProgressBar: false,
-        //         closeOnClick: true,
-        //         pauseOnHover: true,
-        //         draggable: true,
-        //         progress: undefined,
-        //         theme: "light",
-        //         onClose: () => {
-        //             router.push('/')
-        //         }
-        //     })
-        //     localStorage.setItem('token', data.jwttokens)
-        //     setUser({ name: '', email: '', password: '' })
-
-        //     //change loginState when use Created
-        //     loginContext.login()
-
-
     }
 
     return (
@@ -184,15 +138,15 @@ const Page = () => {
                             <h2 className="text-gray-900 text-2xl font-medium title-font mb-5">Sign Up</h2>
                             <div className="relative mb-4">
                                 <label htmlFor="name" className="leading-7 text-xs text-gray-600">Name</label>
-                                <input type="text" id="name" value={user.name} onChange={handleInputs} name="name" className="w-full bg-white border-b-2 border-black focus:border-b-blue-700  text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out mb-3" />
+                                <input type="text" id="name" value={user.name} onChange={handleInputs} name="name" className="w-full bg-transparent border-b-2 border-black focus:border-b-blue-700  text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out mb-3" />
                             </div>
                             <div className="relative mb-4">
                                 <label htmlFor="email" className="leading-7 text-xs text-gray-600">Email</label>
-                                <input type="email" id="email" value={user.email} onChange={handleInputs} name="email" className="w-full bg-white border-b-2 border-black focus:border-b-blue-700  text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out mb-3" />
+                                <input type="email" id="email" value={user.email} onChange={handleInputs} name="email" className="w-full bg-transparent border-b-2 border-black focus:border-b-blue-700  text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out mb-3" />
                             </div>
                             <div className="relative mb-4">
                                 <label htmlFor="password" className="leading-7 text-xs text-gray-600">Password</label>
-                                <input type={showPassword ? 'text' : 'password'} id="password" value={user.password} name="password" className="w-full bg-white border-b-2 border-black focus:border-b-blue-700 text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out mb-3" onChange={mulEvents} />
+                                <input type={showPassword ? 'text' : 'password'} id="password" value={user.password} name="password" className="w-full bg-transparent border-b-2 border-black focus:border-b-blue-700 text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out mb-3" onChange={mulEvents} />
                                 {/* If Password has Value then Login */}
                                 {passValue ? <button onClick={handleEventPreventDefaulf}>
                                     {/* If ShowPassword the Login */}
