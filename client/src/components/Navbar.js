@@ -27,7 +27,7 @@ const Navbar = () => {
                 {showNavbar && <div className='fixed w-[100vw] h-[100vh] top-0 left-0 z-10' onClick={() => setShowNavbar(false)}>
                     <div className='fixed top-0 left-0 z-10'>
                         <div className='w-64 h-[100vh] bg-black shadow-md flex flex-col items-center'>
-                            <div className='mt-7 w-[100%] space-y-2'>
+                            <div className='mt-7 w-[100%] space-y-2 text-gray-400'>
                                 <li className='text-center'>
                                     <Link href={'/'}>
                                         <button className='text-gray-300 text-2xl mb-4'>CloudNoteBook</button>
