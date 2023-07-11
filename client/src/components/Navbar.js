@@ -18,47 +18,35 @@ const Navbar = () => {
                 <div className='mb-3 absolute left-2 top-4 cursor-pointer' onClick={() => { setShowNavbar(true) }}>
                     {/* Menu Svg */}
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
+                        <title>Open Navbar</title>
                         <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                     </svg>
                 </div>
 
                 {/*<---- Responsive Navbar */}
-                {showNavbar && <div className='fixed w-[100vw] h-[100vh] top-0 left-0 z-10'>
+                {showNavbar && <div className='fixed w-[100vw] h-[100vh] top-0 left-0 z-10' onClick={() => setShowNavbar(false)}>
                     <div className='fixed top-0 left-0 z-10'>
-                        <div className='w-64 h-[100vh] bg-black shadow-md flex flex-col items-center p-5'>
-                            <div className='absolute top-4 left-4 sm:right-6'>
-                                {/* Close Svg */}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-x-circle-fill cursor-pointer" viewBox="0 0 16 16" onClick={() => { setShowNavbar(false) }}>
-                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
-                                </svg>
-                            </div>
-                            <div className='mt-12 w-[90%] space-y-2'>
-                                <li>
+                        <div className='w-64 h-[100vh] bg-black shadow-md flex flex-col items-center'>
+                            <div className='mt-7 w-[100%] space-y-2'>
+                                <li className='text-center'>
                                     <Link href={'/'}>
                                         <button className='text-gray-300 text-2xl mb-4'>CloudNoteBook</button>
                                     </Link>
                                 </li>
                                 <li className=''>
                                     <Link href={'/'}>
-                                        <button className={`w-[100%] py-1 mb-3 px-3 text-left  flex border-b-2 ${loginContext.activeLink === '/' ? 'border-b-blue-600' : 'border-b-2'
+                                        <button className={`w-[100%] py-1 mb-3 px-3 text-left  flex  ${loginContext.activeLink === '/' ? 'text-white' : 'hover:textw'
                                             }`}
                                             onClick={() => loginContext.setActiveLink('/')}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-house-door-fill" viewBox="0 0 16 16">
-                                                <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z" />
-                                            </svg>
                                             <span className='ml-4'>Home</span>
                                         </button>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href={'/notes'}>
-                                        <button className={`w-[100%] py-1 mb-3 px-3 text-left  flex border-b-2 ${loginContext.activeLink === '/notes' ? 'border-b-blue-600' : 'border-b-2'
+                                        <button className={`w-[100%] py-1 mb-3 px-3 text-left  flex  ${loginContext.activeLink === '/notes' ? 'text-white' : 'hover:text-white'
                                             }`}
                                             onClick={() => loginContext.setActiveLink('/notes')}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-stickies-fill mt-1" viewBox="0 0 16 16">
-                                                <path d="M0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5A1.5 1.5 0 0 0 0 1.5z" />
-                                                <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zm6 8.5a1 1 0 0 1 1-1h4.396a.25.25 0 0 1 .177.427l-5.146 5.146a.25.25 0 0 1-.427-.177V10.5z" />
-                                            </svg>
                                             <span className='ml-4'>Notes</span>
                                         </button>
                                     </Link>
