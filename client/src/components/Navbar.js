@@ -26,7 +26,7 @@ const Navbar = () => {
                 {/*<---- Responsive Navbar */}
                 {showNavbar && <div className='fixed w-[100vw] h-[100vh] top-0 left-0 z-10' onClick={() => setShowNavbar(false)}>
                     <div className='fixed top-0 left-0 z-10'>
-                        <div className='w-64 h-[100vh] bg-black shadow-md flex flex-col items-center'>
+                        <div className='w-64 h-[100vh] bg-black shadow-md flex flex-col items-center p-2'>
                             <div className='mt-7 w-[100%] space-y-2 text-gray-400'>
                                 <li className='text-center'>
                                     <Link href={'/'}>
@@ -35,7 +35,7 @@ const Navbar = () => {
                                 </li>
                                 <li className=''>
                                     <Link href={'/'}>
-                                        <button className={`w-[100%] py-1 mb-3 px-3 text-left  flex  ${loginContext.activeLink === '/' ? 'text-white' : 'hover:text-white'
+                                        <button className={`w-[100%] py-1 mb-2 px-3 text-left  flex  ${loginContext.activeLink === '/' ? 'text-white' : 'hover:text-white'
                                             }`}
                                             onClick={() => loginContext.setActiveLink('/')}>
                                             <span className='ml-4'>Home</span>
@@ -44,7 +44,7 @@ const Navbar = () => {
                                 </li>
                                 <li>
                                     <Link href={'/notes'}>
-                                        <button className={`w-[100%] py-1 mb-3 px-3 text-left  flex  ${loginContext.activeLink === '/notes' ? 'text-white' : 'hover:text-white'
+                                        <button className={`w-[100%] py-1 mb-2 px-3 text-left  flex  ${loginContext.activeLink === '/notes' ? 'text-white' : 'hover:text-white'
                                             }`}
                                             onClick={() => loginContext.setActiveLink('/notes')}>
                                             <span className='ml-4'>Notes</span>
