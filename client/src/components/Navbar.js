@@ -101,6 +101,7 @@ const Navbar = () => {
                                     </div>
                                 </div>
                                 <div className='space-y-2 w-[90%] flex flex-col mt-7'>
+                                    <button className='py-[6px] bg-black text-xs border border-black hover:bg-white hover:text-black' onClick>Upload Profile Picture</button>
                                     <button className='py-[6px] bg-black text-xs border border-black hover:bg-white hover:text-black' onClick={loginContext.logout}>Logout</button>
                                 </div>
                             </div>
