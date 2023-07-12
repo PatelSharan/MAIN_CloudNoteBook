@@ -11,7 +11,7 @@ const Navbar = () => {
     const loginContext = useContext(LoginContext)
 
     return (
-        <nav className='bg-black text-gray-200 h-16'>
+        <nav className='bg-black text-gray-200 h-16 fixed w-full z-10 top-0'>
             <ul className='flex h-[100%] items-center'>
                 {/* To open Navbar */}
                 <div className='mb-3 absolute left-2 top-4 cursor-pointer' onClick={() => { setShowNavbar(true) }}>
