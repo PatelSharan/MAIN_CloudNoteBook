@@ -47,7 +47,7 @@ const Page = () => {
 
     useEffect(() => {
         fetchNotes(`${backEndurl}/getnotes`)
-    })
+    }, [])
 
 
     //Delete Specific Note
@@ -147,7 +147,7 @@ const Page = () => {
                 <>
                     {/* When User has any note */}
                     {notes.length > 0 ? (
-                        notes.map((note, index) => (
+                        notes.map((note) => (
                             // <section className="text-gray-600 body-font" key={note._id}>
                             //     <div className="flex flex-wrap px-5 py-3 m-auto sm:w-[80vw]">
                             //         <div className="flex border shadow-md rounded border-gray-200 p-5 sm:flex-row flex-col w-full">
@@ -163,7 +163,7 @@ const Page = () => {
                             //     </div>
                             //     <ToastContainer />
                             // </section>
-                            <NoteBox noteId={index + 1} noteTitle={note.title} noteBody={note.body} editNote={() => { editNote(note._id) }} deleteNote={() => { deleteNote(note._id) }} />
+                            <NoteBox noteId={note._id} noteTitle={note.title} noteBody={note.body} editNote={() => { editNote(note._id) }} deleteNote={() => { deleteNote(note._id) }} />
                         ))
                     ) : (
                         // User does not have any note
