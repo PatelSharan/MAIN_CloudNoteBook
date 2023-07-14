@@ -47,7 +47,7 @@ const Page = () => {
 
     useEffect(() => {
         fetchNotes(`${backEndurl}/getnotes`)
-    }, [])
+    })
 
 
     //Delete Specific Note
