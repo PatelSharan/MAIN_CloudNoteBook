@@ -6,7 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 const NoteBox = ({ noteId, noteTitle, noteBody, editNote, deleteNote }) => {
     return (
         <>
-            <section className="text-gray-600 body-font" key={noteId}>
+            <section className="text-gray-600 body-font" key={noteId + 1}>
+                {console.log(noteId)}
                 <div className="flex flex-wrap px-5 py-3 m-auto sm:w-[80vw]">
                     <div className="flex border shadow-md rounded border-gray-200 p-5 sm:flex-row flex-col w-full">
                         <div className="flex-grow">
