@@ -3,12 +3,12 @@ const dotevn = require('dotenv').config()
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 3001
-const connectDB = require('./connectDB/connectDB.js')
+const connectDB = require('./src/connectDB/connectDB.js')
 const DB_URL = process.env.DB_URL
-const routerUser = require('./router/user.js')
-const routerNote = require('./router/note.js')
+const routerUser = require('./src/router/user.js')
+const routerNote = require('./src/router/note.js')
 const cors = require('cors')
-const fetchuser = require('./middelwares/fetchuser.js')
+const fetchuser = require('./src/middelwares/fetchuser.js')
 
 
 app.use(express.json())
