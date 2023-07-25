@@ -1,8 +1,11 @@
-const express = require('express')
-const router = express.Router()
-const Note = require('../models/note.js')
-const fetchuser = require('../middelwares/fetchuser.js')
+// const express = require('express')
+// const Note = require('../models/note.js')
+// const fetchuser = require('../middelwares/fetchuser.js')
 
+import express from 'express'
+const router = express.Router()
+import Note from '../models/note.js'
+import fetchuser from '../middelwares/fetchuser.js'
 
 
 router.get('/getnotes', fetchuser, async (req, res) => {
@@ -38,7 +41,6 @@ router.put('/updatenote/:id', async (req, res) => {
         else {
             findNoteById.title = req.body.title
             findNoteById.body = req.body.body
-
             const result = await findNoteById.save()
             res.json(result);
         }
@@ -49,7 +51,6 @@ router.put('/updatenote/:id', async (req, res) => {
 
 router.delete('/deletenote/:id', async (req, res) => {
     try {
-
         let id = req.params.id
         let findNoteAndDelete = await Note.findByIdAndDelete(id)
         if (!findNoteAndDelete) {
@@ -62,4 +63,6 @@ router.delete('/deletenote/:id', async (req, res) => {
 })
 
 
-module.exports = router
+// module.exports = router
+
+export default router 

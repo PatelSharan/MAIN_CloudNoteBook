@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+// const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const noteSchema = new mongoose.Schema({
     //Adding user 
@@ -22,4 +23,7 @@ const noteSchema = new mongoose.Schema({
 
 const Note = new mongoose.model('Note', noteSchema)
 
-module.exports = Note
+// module.exports = Note
+
+
+export default Note

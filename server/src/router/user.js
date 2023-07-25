@@ -1,17 +1,15 @@
-const express = require('express')
+import express from 'express'
 const router = express.Router()
-const User = require('../models/user.js')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+import User from '../models/user.js'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 const SECRET_KEY = process.env.SECRET_KEY
-const fetchuser = require('../middelwares/fetchuser.js')
-const { check, validationResult } = require('express-validator');
-
+import fetchuser from '../middelwares/fetchuser.js'
+import { check, validationResult } from 'express-validator'
 
 router.get('/', (req, res) => {
     res.send('Server.....')
 })
-
 
 router.post('/registeruser', [
     check('name', 'Name Must Be At Least 2 Characters.').isLength({ min: 2 }),
@@ -47,7 +45,6 @@ router.post('/registeruser', [
                     const saltRound = 10;
                     const hasedPassword = await bcrypt.hash(req.body.password, saltRound)
 
-
                     //newUser 
                     const newUser = await new User({ name, email, password: hasedPassword, jwttokens: '' })
 
@@ -55,10 +52,8 @@ router.post('/registeruser', [
                     const jwttoken = jwt.sign({ id: newUser._id.toHexString() }, SECRET_KEY)
                     newUser.jwttokens = jwttoken
 
-
                     //Save new user Into DB
                     const result = await newUser.save()
-
                     res.status(200).send(newUser)
                 }
             }
@@ -69,7 +64,6 @@ router.post('/registeruser', [
     }
 })
 
-
 router.post('/loginuser', async (req, res) => {
     try {
         const { email, password, jwttokens } = req.body
@@ -79,7 +73,6 @@ router.post('/loginuser', async (req, res) => {
             return res.status(422).json("Please Fill Details")
         }
         else {
-
             //find user with email
             const findUser = await User.findOne({ email })
             if (!findUser) {
@@ -94,9 +87,6 @@ router.post('/loginuser', async (req, res) => {
                 } else {
                     res.status(401).json('Invalid Details')
                 }
-
-
-
                 const token = findUser.jwttokens
                 const verifyToken = jwt.verify(token, SECRET_KEY)
                 if (!verifyToken) {
@@ -114,7 +104,6 @@ router.post('/loginuser', async (req, res) => {
     }
 })
 
-
 router.post('/changepassword', (req, res) => {
     try {
 
@@ -125,7 +114,6 @@ router.post('/changepassword', (req, res) => {
 
 router.post('/getuser', fetchuser, async (req, res) => {
     try {
-
         userId = await req.userId
         const user = await User.findById(userId).select('-password')
         res.send(user)
@@ -137,4 +125,6 @@ router.post('/getuser', fetchuser, async (req, res) => {
 
 
 
-module.exports = router
+// module.exports = router
+
+export default router

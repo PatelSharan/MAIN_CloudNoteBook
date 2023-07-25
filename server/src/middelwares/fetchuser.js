@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken')
+// const jwt = require('jsonwebtoken')
+import jwt from 'jsonwebtoken'
 const SECRET_KEY = process.env.SECRET_KEY
-
 
 
 const fetchuser = (req, res, next) => {
@@ -20,4 +20,5 @@ const fetchuser = (req, res, next) => {
 
 
 
-module.exports = fetchuser
+// module.exports = fetchuser
+export default fetchuser
