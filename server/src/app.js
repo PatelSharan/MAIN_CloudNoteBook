@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 import express from 'express'
 import cors from 'cors'
-import connectDB from './connectDB/connectDB.js'
+import connectDB from './config/connectDB.js'
 import routerUser from './router/user.js'
 import routerNote from './router/note.js'
 import fetchuser from './middelwares/fetchuser.js'
