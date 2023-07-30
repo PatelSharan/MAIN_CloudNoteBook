@@ -14,7 +14,11 @@ export default function Home() {
 
   const router = useRouter()
 
+  //Hosted backend api 
   const backEndurl = 'https://cloudnotebook-backend.vercel.app'
+
+  //local backend api
+  // const backEndurl = 'http://localhost:7000'
 
   const [note, setNote] = useState({
     title: '', body: ''

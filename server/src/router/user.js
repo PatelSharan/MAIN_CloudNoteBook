@@ -1,3 +1,5 @@
+import dotenv from 'dotenv'
+dotenv.config()
 import express from 'express'
 const router = express.Router()
 import User from '../models/user.js'
@@ -18,13 +20,11 @@ router.post('/registeruser', [
 ], async (req, res) => {
 
     try {
-
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             res.status(401).json(errors)
         }
         else {
-
             const { name, email, password } = req.body
 
             //If name, email, and password not enterd
@@ -32,15 +32,12 @@ router.post('/registeruser', [
                 res.status(422).json('Please Fill Details')
             }
             else {
-
                 //If user is already Exist
                 const userExist = await User.findOne({ email })
                 if (userExist) {
                     res.status(400).json('User Exist With This Email')
                 }
                 else {
-
-
                     // hash password
                     const saltRound = 10;
                     const hasedPassword = await bcrypt.hash(req.body.password, saltRound)
@@ -79,7 +76,6 @@ router.post('/loginuser', async (req, res) => {
                 res.status(400).json('User Not Exist')
             }
             else {
-
                 //password compare 
                 const matchPassword = await bcrypt.compare(password, findUser.password)
                 if (matchPassword) {
@@ -114,12 +110,12 @@ router.post('/changepassword', (req, res) => {
 
 router.post('/getuser', fetchuser, async (req, res) => {
     try {
-        userId = await req.userId
+        let userId = await req.userId
         const user = await User.findById(userId).select('-password')
         res.send(user)
     } catch (error) {
         console.error(error.message)
-        res.send('can\'t get user')
+        res.json('can\'t get user')
     }
 })
 

@@ -12,11 +12,11 @@ const EditNote = ({ editedNoteTitle, editedNoteBody, handleInputChange, saveChan
                             <div className="w-[90vw] border rounded-md sm:w-[32vw] bg-white flex flex-col md:py-8 mt-8 md:mt-0 m-auto shadow-md  p-5 sm:p-10 ">
                                 <h2 className="text-gray-900 text-2xl mb-1 font-medium title-font text-center">Update Note</h2>
                                 <div className="relative mb-4">
-                                    <label for="title" className="leading-7 text-xs text-gray-600">Title</label>
+                                    <label htmlFor="title" className="leading-7 text-xs text-gray-600">Title</label>
                                     <input type="text" id="title" name="title" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out font-semibold" value={editedNoteTitle} onChange={handleInputChange} />
                                 </div>
                                 <div className="relative mb-4">
-                                    <label for="description" className="leading-7 text-xs text-gray-600">Description</label>
+                                    <label htmlFor="description" className="leading-7 text-xs text-gray-600">Description</label>
                                     <textarea id="body" name="body" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-sm outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out" value={editedNoteBody} onChange={handleInputChange}></textarea>
                                 </div>
                                 <div className="text-right space-x-4">

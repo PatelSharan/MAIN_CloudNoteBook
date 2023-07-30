@@ -13,7 +13,11 @@ const Page = () => {
 
     const loadingContext = useContext(LoadingContext)
 
+    //Hosted backend api 
     const backEndurl = 'https://cloudnotebook-backend.vercel.app'
+
+    //local backend api
+    // const backEndurl = 'http://localhost:7000'
 
     const [notes, setNotes] = useState([])
 
