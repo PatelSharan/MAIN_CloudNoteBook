@@ -11,10 +11,11 @@ const Navbar = () => {
     const loginContext = useContext(LoginContext)
 
     return (
-        <nav className='bg-black text-gray-200 h-16 fixed w-full z-10 top-0'>
-            <ul className='flex h-[100%] items-center'>
+        <nav className='bg-black text-gray-200 h-16 fixed w-full z-10 top-0 flex items-center'>
+            <ul className='flex'>
+
                 {/* To open Navbar */}
-                <div className='mb-3 absolute left-2 top-4 cursor-pointer' onClick={() => { setShowNavbar(true) }}>
+                <div className='ml-3 cursor-pointer' onClick={() => { setShowNavbar(true) }}>
                     {/* Menu Svg */}
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
                         <title>Open Navbar</title>
