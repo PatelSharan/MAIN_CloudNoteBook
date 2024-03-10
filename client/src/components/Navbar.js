@@ -11,7 +11,7 @@ const Navbar = () => {
     const loginContext = useContext(LoginContext)
 
     return (
-        <nav className='bg-black text-gray-200 h-16 fixed w-full z-10 top-0 flex items-center'>
+        <nav className='bg-black text-gray-200 h-16 sticky w-full z-10 top-0 flex items-center'>
             <ul className='flex'>
 
                 {/* To open Navbar */}
@@ -33,7 +33,7 @@ const Navbar = () => {
                                         <button className='text-gray-300 text-2xl mb-4'>CloudNoteBook</button>
                                     </Link>
                                 </li>
-                                <li className=''>
+                                <li>
                                     <Link href={'/'}>
                                         <button className={`w-[100%] py-1 mb-2 px-3 text-left  flex  ${loginContext.activeLink === '/' ? 'text-white' : 'hover:text-white'
                                             }`}
