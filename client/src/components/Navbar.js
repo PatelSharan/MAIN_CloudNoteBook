@@ -1,10 +1,13 @@
 'use client'
-import React, { useContext, useState } from 'react'
 import Link from 'next/link'
+import React, { useContext, useState } from 'react'
+import { usePathname } from "next/navigation";
 import LoginContext from '@/contexts/login/logincontext';
 
 
 const Navbar = () => {
+
+    const pathName = usePathname();
 
     const [showNavbar, setShowNavbar] = useState(false)
 
@@ -14,9 +17,22 @@ const Navbar = () => {
         setShowNavbar(!showNavbar);
     };
 
+    const navItems = [
+        {
+            href: '/',
+            label: 'Home',
+        },
+        {
+            href: '/notes',
+            label: 'notes',
+        }
+    ];
+
+
     return (
-        <nav className='bg-black text-gray-200 h-16 sticky w-full z-10 top-0 flex items-center'>
+        <nav className='bg-black text-gray-200 h-16 sticky w-full z-10 top-0 flex items-center fontRobotoCondensed'>
             <ul className='flex'>
+
 
                 {/* To open Navbar */}
                 <div className='ml-3 cursor-pointer' onClick={toggleNavbar}>
@@ -25,7 +41,9 @@ const Navbar = () => {
                         <path fillRule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5" />
                     </svg>
                 </div>
-
+                <Link href={'/'}>
+                    <button className='text-gray-300 text-2xl ml-1'>CloudNoteBook</button>
+                </Link>
                 {/*<---- Responsive Navbar */}
                 <div className={`fixed top-0 left-0 z-10 w-64 h-full bg-black shadow-md flex flex-col items-center p-2 transition-transform duration-300 ease-in-out ${showNavbar ? 'translate-x-0' : '-translate-x-full'}`} onClick={toggleNavbar}>
                     <div className='mt-2 w-[100%] space-y-2 text-gray-400'>
@@ -35,29 +53,16 @@ const Navbar = () => {
                                 <path fillRule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5" />
                             </svg>
                         </div>
-                        <li className='text-center'>
-                            <Link href={'/'}>
-                                <button className='text-gray-300 text-2xl mb-4'>CloudNoteBook</button>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href={'/'}>
-                                <button className={`w-[100%] py-1 mb-2 px-3 text-left  flex  ${loginContext.activeLink === '/' ? 'text-white' : 'hover:text-white'
-                                    }`}
-                                    onClick={() => loginContext.setActiveLink('/')}>
-                                    <span className='ml-4'>Home</span>
-                                </button>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href={'/notes'}>
-                                <button className={`w-[100%] py-1 mb-2 px-3 text-left  flex  ${loginContext.activeLink === '/notes' ? 'text-white' : 'hover:text-white'
-                                    }`}
-                                    onClick={() => loginContext.setActiveLink('/notes')}>
-                                    <span className='ml-4'>Notes</span>
-                                </button>
-                            </Link>
-                        </li>
+                        <ul className='list-none space-y-1'>
+                            {navItems.map((item) => (
+                                <li key={item.href} onClick={toggleNavbar}>
+                                    <Link href={item.href} className={`w-[100%] py-1 px-3 text-left flex items-center uppercase hover:text-gray-200 ${pathName === item.href && 'text-white'}`}>
+                                        {item.svg}
+                                        <span className='ml-2'>{item.label}</span>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
 

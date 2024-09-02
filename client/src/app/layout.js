@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
         <LoginState>
           <LoadingState>
             <Navbar />
-            <div className='min-h-[98vh]'>
+            <div className='min-h-[98vh] fontRobotoCondensed'>
               {children}
             </div>
             <Footer />
