@@ -6,8 +6,6 @@ import { Router, useRouter } from 'next/navigation';
 import LoginContext from "@/contexts/login/logincontext";
 import Link from "next/link";
 
-
-
 export default function Home() {
 
   const loginContext = useContext(LoginContext)

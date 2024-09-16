@@ -1,9 +1,8 @@
 'use client'
 import Link from 'next/link'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useRef, useEffect } from 'react'
 import { usePathname } from "next/navigation";
 import LoginContext from '@/contexts/login/logincontext';
-
 
 const Navbar = () => {
 
@@ -12,6 +11,7 @@ const Navbar = () => {
     const [showNavbar, setShowNavbar] = useState(false)
 
     const loginContext = useContext(LoginContext)
+    const resNavbar = useRef(null);
 
     const toggleNavbar = () => {
         setShowNavbar(!showNavbar);
@@ -28,12 +28,20 @@ const Navbar = () => {
         }
     ];
 
+    // for closing responsive navbar if clicked outside navbar
+    useEffect(() => {
+        let handler = (e) => {
+            if (!resNavbar.current.contains(e.target)) {
+                setShowNavbar(false)
+            }
+        }
+        document.addEventListener("mousedown", handler)
+    })
+
 
     return (
         <nav className='bg-black text-gray-200 h-16 sticky w-full z-10 top-0 flex items-center fontRobotoCondensed'>
             <ul className='flex'>
-
-
                 {/* To open Navbar */}
                 <div className='ml-3 cursor-pointer' onClick={toggleNavbar}>
                     {/* Menu Svg */}
@@ -45,7 +53,7 @@ const Navbar = () => {
                     <button className='text-gray-300 text-2xl ml-1'>CloudNoteBook</button>
                 </Link>
                 {/*<---- Responsive Navbar */}
-                <div className={`fixed top-0 left-0 z-10 w-64 h-full bg-black shadow-md flex flex-col items-center p-2 transition-transform duration-300 ease-in-out ${showNavbar ? 'translate-x-0' : '-translate-x-full'}`} onClick={toggleNavbar}>
+                <div className={`fixed top-0 left-0 z-10 w-64 h-full bg-black shadow-md flex flex-col items-center p-2 transition-transform duration-300 ease-in-out ${showNavbar ? 'translate-x-0' : '-translate-x-full'}`} ref={resNavbar}>
                     <div className='mt-2 w-[100%] space-y-2 text-gray-400'>
                         <div className='ml-2 cursor-pointer hover:text-white' onClick={toggleNavbar}>
                             {/* Menu Svg */}
@@ -94,9 +102,9 @@ const Navbar = () => {
                 {/* <----- UserProfile */}
                 {
                     loginContext.showProfile && (
-                        <div className='fixed w-[100vw] h-[100vh] top-0 left-0 z-10 backdrop-blur-sm'>
+                        <div className={`fixed w-[100vw] h-[100vh] top-0 left-0 z-10 backdrop-blur-sm`}>
                             <div className='absolute top-0 right-0'>
-                                <div className='w-64 sm:w-80 h-[100vh] bg-gray-100 shadow-md border flex flex-col items-center p-5'>
+                                <div className={`w-64 sm:w-80 h-[100vh] bg-gray-100 shadow-md border flex flex-col items-center p-5 `}>
                                     <div className='absolute top-3 right-3 sm:right-6'>
                                         {/* User Svg */}
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-x-circle-fill text-black cursor-pointer" viewBox="0 0 16 16" onClick={() => { loginContext.setShowProfile(false) }}>
